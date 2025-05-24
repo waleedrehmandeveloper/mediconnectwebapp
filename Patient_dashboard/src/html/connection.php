@@ -1,12 +1,12 @@
 <?php
-$hostname="localhost";
-$server="root";
-$pass="";
-$database="ecommercewebsite";
+$servername = "localhost";   
+$username = "root";        
+$password = "";              
+$dbname = "mediconnect_app";  
 
-$conn= new mysqli($hostname,$server,$pass,$database);
-if(isset($conn)){
-    echo "DataBase connected successfully".mysqli_error($conn);
-    exit();
-}
+$conn = new mysqli($servername, $username, $password, $dbname);
+
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+} 
 ?>

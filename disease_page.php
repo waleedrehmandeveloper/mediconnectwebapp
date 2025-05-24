@@ -1,4 +1,5 @@
 <?php
+session_start();
 include('connection.php');
 $diseases = [];
 $sql = "SELECT * FROM diseases ORDER BY name ASC";

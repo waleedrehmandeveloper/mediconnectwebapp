@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 19, 2025 at 02:45 PM
+-- Generation Time: May 21, 2025 at 02:44 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.0.30
 
@@ -324,7 +324,9 @@ CREATE TABLE `doctor_availiblity` (
 INSERT INTO `doctor_availiblity` (`doctor_id`, `available_day`, `available_time_to`, `available_time_from`, `id`) VALUES
 (20, 'monday', '08:00', ' 13:00', 1),
 (20, 'wednesday', '17:00', ' 14:00', 2),
-(20, 'friday', '00:00', ' 17:00', 3);
+(20, 'friday', '00:00', ' 17:00', 3),
+(18, 'sunday', '14:32', ' 04:34', 4),
+(18, 'sunday', '14:32', ' 04:34', 5);
 
 -- --------------------------------------------------------
 
@@ -361,10 +363,11 @@ CREATE TABLE `doctor_register` (
 INSERT INTO `doctor_register` (`id`, `name`, `email`, `password`, `role`, `phone`, `gender`, `location`, `postal_code`, `clinic_address`, `category`, `qualification`, `experience`, `profile_pic`, `date_time`, `bio`, `from_time`, `to_time`, `available_day`) VALUES
 (16, 'Wlaeed Rehman', 'waleedrehman2007@gmail.com', '123456', 'doctor', '03152210948', NULL, 'Karachi', '75890', 'Malir, Karachi', 'dentist', 'MBBS (Orthodontics)', 1, NULL, '2025-05-17 02:06:02', 'Im a Dentist from karachi', 0, 0, 'Array'),
 (17, 'Umair Rehman', 'umairrehman2004@gmail.com', 'umair123', 'doctor', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2025-05-17 12:09:32', NULL, NULL, NULL, NULL),
-(18, 'Wlaeed Rehman', 'waleedrehman2007@gmail.com', 'waleed123', 'doctor', '03152210948', 'male', 'Karachi', '75890', 'Malir, Karachi', 'dentist', 'MBBS (SURGONIEN)', 5, 'imagedata/13_whatsapp_733585.png', '2025-05-17 21:42:43', 'i am a doctor', 0, 0, 'wednesday'),
+(18, 'Waleed Rehman', 'waleedrehman2007@gmail.com', 'waleed123', 'doctor', '03152210948', 'male', 'Karachi', '75890', 'Malir, Karachi', 'dentist', 'MBBS (SURGONIEN)', 2, 'imagedata/55_IMG-20241026-WA0017.jpg', '2025-05-17 21:42:43', 'Bio doctors\" refers to a doctor specializing in biological sciences, often focusing on areas like genetics, microbiology, or cell biology. They may also be involved in clinical settings, specializing ', 0, 0, 'wednesday'),
 (19, 'Muhammad Umair', 'umairrehman2004@gmail.com', 'umair', 'doctor', '03152210948', 'male', 'Lahore', '75890', 'Malir, Karachi', 'surgeon', 'MBBS (SURGONIEN)', 2, 'imagedata/12_dash.png', '2025-05-18 01:19:28', 'I am haert surgon', NULL, NULL, NULL),
 (20, 'Dr Wlaeed Rehman', 'waleedrehman2007@gmail.com', '7878990', 'doctor', '03152210948', 'male', 'Karachi', '75890', 'Malir, Karachi', 'dentist', 'MBBS (SURGONIEN)', 2, 'imagedata/4_IMG-20241026-WA0017.jpg', '2025-05-19 00:52:10', 'Dr. Ahmad Ali is a skilled and experienced dentist with over 10 years of practice in dental care. He completed his BDS degree from the University of Karachi and has participated in various national an', NULL, NULL, NULL),
-(21, 'Dr Umair Rehman', 'umairrehman2004@gmail.com', '1234', 'doctor', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2025-05-19 01:40:13', NULL, NULL, NULL, NULL);
+(21, 'Dr Umair Rehman', 'umairrehman2004@gmail.com', '1234', 'doctor', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2025-05-19 01:40:13', NULL, NULL, NULL, NULL),
+(22, 'Abbas haider', 'abbashaider@gmail.com', 'abbas', 'doctor', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2025-05-21 03:05:24', NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -399,20 +402,25 @@ CREATE TABLE `patient_register` (
   `email` varchar(100) NOT NULL,
   `password` varchar(50) NOT NULL,
   `role` varchar(50) NOT NULL,
-  `date_time` varchar(200) NOT NULL
+  `date_time` varchar(200) NOT NULL,
+  `contact` varchar(20) DEFAULT NULL,
+  `gender` varchar(10) DEFAULT NULL,
+  `profile_pic` varchar(100) DEFAULT NULL,
+  `banner` varchar(100) DEFAULT NULL,
+  `city` varchar(50) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `patient_register`
 --
 
-INSERT INTO `patient_register` (`id`, `name`, `email`, `password`, `role`, `date_time`) VALUES
-(1, 'Waleed Rehman', 'waleedrehman@gmail.com', 'aaaa', 'patient', '2025-05-09 04:52:42'),
-(2, 'Waleed Rehman', 'waleedrehman@gmail.com', 'aaaaaa', 'patient', '2025-05-09 04:52:48'),
-(3, 'Waleed Rehman', 'waleedrehman@gmail.com', 'aaaaaa', 'patient', '2025-05-09 05:27:45'),
-(4, 'Waleed Rehman', 'waleedrehman@gmail.com', '123', 'patient', '2025-05-09 05:28:00'),
-(5, 'Hammad', 'hammad@gmail.com', 'hammad', 'patient', '2025-05-09 07:01:10'),
-(6, 'Hammad', 'hammad@gmail.com', 'hammad', 'patient', '2025-05-19 17:13:01');
+INSERT INTO `patient_register` (`id`, `name`, `email`, `password`, `role`, `date_time`, `contact`, `gender`, `profile_pic`, `banner`, `city`) VALUES
+(1, 'Fatima', 'fatima@gmail.com', '1234', 'patient', '2025-05-09 04:52:42', '03152210948', 'female', 'images/20_rose.jpg', NULL, 'Karachi'),
+(2, 'Waleed Rehman', 'waleedrehman@gmail.com', 'aaaaaa', 'patient', '2025-05-09 04:52:48', NULL, NULL, NULL, NULL, NULL),
+(3, 'Waleed Rehman', 'waleedrehman@gmail.com', 'aaaaaa', 'patient', '2025-05-09 05:27:45', NULL, NULL, NULL, NULL, NULL),
+(4, 'Waleed Rehman', 'waleedrehman@gmail.com', '123', 'patient', '2025-05-09 05:28:00', NULL, NULL, NULL, NULL, NULL),
+(5, 'Hammad', 'hammad@gmail.com', 'hammad', 'patient', '2025-05-09 07:01:10', NULL, NULL, NULL, NULL, NULL),
+(6, 'Hammad', 'hammad@gmail.com', 'hammad', 'patient', '2025-05-19 17:13:01', NULL, NULL, NULL, NULL, NULL);
 
 --
 -- Indexes for dumped tables
@@ -486,13 +494,13 @@ ALTER TABLE `diseases`
 -- AUTO_INCREMENT for table `doctor_availiblity`
 --
 ALTER TABLE `doctor_availiblity`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `doctor_register`
 --
 ALTER TABLE `doctor_register`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT for table `medicontact`

@@ -36,7 +36,7 @@ $fresult= mysqli_fetch_assoc($result);
       <!-- Sidebar scroll-->
       <div>
         <div class="brand-logo d-flex align-items-center justify-content-between">
-          <a href="./index.php" class="text-nowrap logo-img">
+          <a href="../../../index.php" class="text-nowrap logo-img">
             <img class="w-100" src="../assets/images/logos/mediconnect_logo.png" alt="" />
           </a>
           <div class="close-btn d-xl-none d-block sidebartoggler cursor-pointer" id="sidebarCollapse">
@@ -62,11 +62,16 @@ $fresult= mysqli_fetch_assoc($result);
       <div class="container-fluid">
         <div class="row">
   <!-- Summary Cards -->
+   <?php
+   $totalQuery = "SELECT COUNT(*) AS total FROM appointments WHERE doctor_id = $doctorid";
+   $totalResult = mysqli_query($conn, $totalQuery);
+   $total = mysqli_fetch_assoc($totalResult)['total'];
+   ?>
   <div class="col-md-4 mb-4">
     <div class="card text-center shadow-sm">
       <div class="card-body">
         <h5 class="card-title">Total Appointments</h5>
-        <h2 class="text-primary">12</h2>
+        <h2 class="text-primary"><?php echo $total ?></h2>
       </div>
     </div>
   </div>
@@ -92,9 +97,9 @@ $fresult= mysqli_fetch_assoc($result);
     <div class="card shadow-sm">
       <div class="card-body text-center">
       <img style="width: 100px; height: 100px; object-fit: cover;" src="<?php echo $fresult['profile_pic']; ?>" alt="Doctor Image" class="profile-avatar rounded-circle mb-2">
-        <h5 class="card-title">Dr. Waleed Rehman</h5>
-        <p class="text-muted mb-1">Cardiologist</p>
-        <p class="text-muted small">Faisalabad, Pakistan</p>
+        <h5 class="card-title"><?php echo $fresult['name']; ?></h5>
+        <p class="text-muted mb-1"><?php echo $fresult['category']; ?></p>
+        <p class="text-muted small"><?php echo $fresult['location'] ?>- Pakistan</p>
         <a href="profile.php" class="btn btn-sm btn-outline-primary">View Profile</a>
       </div>
     </div>

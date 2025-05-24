@@ -9,7 +9,39 @@
   <link rel="stylesheet" href="../../node_modules/simplebar/dist/simplebar.min.css">
   <link rel="stylesheet" href="../assets/css/styles.min.css" />
 </head>
+  <style>
+    .container {
+      max-width: 600px;
+      margin: 100px auto;
+      background: #ffffff;
+      padding: 40px;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      text-align: center;
+    }
+    .info {
+      background-color: #e8f5e9;
+      padding: 15px;
+      border-left: 5px solid #2e7d32;
+      border-radius: 8px;
+      margin: 20px 0;
+    }
 
+    .btn {
+      display: inline-block;
+      padding: 10px 20px;
+      background-color: #1976d2;
+      color: #fff;
+      text-decoration: none;
+      border-radius: 6px;
+      margin-top: 20px;
+      transition: background 0.3s ease;
+    }
+
+    .btn:hover {
+      background-color: #125ca1;
+    }
+  </style>
 <body>
   <!--  Body Wrapper -->
   <div class="page-wrapper" id="main-wrapper" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full"
@@ -20,7 +52,7 @@
       <div>
         <div class="brand-logo d-flex align-items-center justify-content-between">
           <a href="./index.php" class="text-nowrap logo-img">
-            <img src="../assets/images/logos/mediconnect_logo.png" alt="" />
+            <img class="w-100" src="../assets/images/logos/mediconnect_logo.png" alt="" />
           </a>
           <div class="close-btn d-xl-none d-block sidebartoggler cursor-pointer" id="sidebarCollapse">
             <i class="ti ti-x fs-8"></i>
@@ -38,43 +70,25 @@
     <!--  Main wrapper -->
     <div class="body-wrapper">
       <!--  Header Start -->
-    <?php
-    include("header.php");
-    ?>
+        <?php
+       include('header.php');
+       ?>
       <!--  Header End -->
       <div class="container-fluid">
-        <div class="card">
-          <div class="card-body">
-            <h5 class="card-title fw-semibold mb-4">Alerts</h5>
-            <div class="card mb-0">
-              <div class="card-body p-4">
-                <div class="alert alert-primary" role="alert">
-                  A simple primary alert—check it out!
-                </div>
-                <div class="alert alert-secondary" role="alert">
-                  A simple secondary alert—check it out!
-                </div>
-                <div class="alert alert-success" role="alert">
-                  A simple success alert—check it out!
-                </div>
-                <div class="alert alert-danger" role="alert">
-                  A simple danger alert—check it out!
-                </div>
-                <div class="alert alert-warning" role="alert">
-                  A simple warning alert—check it out!
-                </div>
-                <div class="alert alert-info" role="alert">
-                  A simple info alert—check it out!
-                </div>
-                <div class="alert alert-light" role="alert">
-                  A simple light alert—check it out!
-                </div>
-                <div class="alert alert-dark" role="alert">
-                  A simple dark alert—check it out!
-                </div>
-              </div>
-            </div>
-          </div>
+         <div class="container">
+    <h1>Appointment Confirmed ✅</h1>
+    <p>Thank you for booking your appointment!</p>
+    
+    <div class="info">
+      <p><strong>Doctor:</strong> Dr. Ali Khan (Cardiologist)</p>
+      <p><strong>Date:</strong> 22 May 2025</p>
+      <p><strong>Time:</strong> 04:00 PM</p>
+    </div>
+
+    <p>A confirmation email has been sent to your registered email address.</p>
+
+    <a href="my_appointments.html" class="btn">Go to My Appointments</a>
+  </div>
         </div>
         <div class="py-6 px-6 text-center">
           <p class="mb-0 fs-4">Design and Developed by <a href="https://adminmart.com/" target="_blank"

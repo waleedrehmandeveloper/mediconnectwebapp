@@ -114,7 +114,6 @@ session_start();
         <label class="mb-1" for="role">Select Role</label>
         <select id="role" name="role" class="form-control" required>
             <option disabled selected>select</option>
-            <option value="patient">Admin</option>
             <option value="patient">Patient</option>
             <option value="doctor">Doctor</option>
         </select>
@@ -129,6 +128,16 @@ if (isset($_POST['signup'])) {
     $email    = $_POST['email'];
     $password = $_POST['password'];
     $role     = $_POST['role'];
+
+    $check_email = mysqli_query($conn, "SELECT * FROM doctor_register WHERE email = '$email'");
+    $check_password = mysqli_query($conn, "SELECT * FROM doctor_register WHERE password = '$password'");
+    if(mysqli_num_rows($check_email) || mysqli_num_rows($check_password)){
+      echo"
+       <script>
+       alert('Email or password already exists!')
+       </script>
+      ";
+    }
 
     if ($role === "doctor") {
         $query = "INSERT INTO doctor_register (name, email, password, role, date_time)

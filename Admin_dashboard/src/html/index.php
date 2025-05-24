@@ -23,7 +23,77 @@ $admin_name = $_SESSION['aname'];
   <link rel="stylesheet" href="../assets/css/styles.min.css" />
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 </head>
+  <style>
+    body {
+      background-color: #f8f9fa;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    .card {
+      border-radius: 0.5rem;
+      box-shadow: 0 0.15rem 1.75rem rgb(58 59 69 / 15%);
+    }
+    .card-title {
+      font-weight: 600;
+      font-size: 1.25rem;
+    }
+    .progress {
+      height: 0.5rem;
+      border-radius: 0.25rem;
+    }
+    .table thead th {
+      border-bottom: 2px solid #0d6efd;
+    }
+    .table td, .table th {
+      vertical-align: middle;
+    }
+    .btn-primary {
+      border-radius: 0.25rem;
+      padding: 0.5rem 1.25rem;
+    }
+     .card {
+      border-radius: 0.5rem;
+      box-shadow: 0 0.15rem 1.75rem rgb(58 59 69 / 15%);
+    }
+    .card-title {
+      font-weight: 600;
+      font-size: 1.25rem;
+    }
+    .progress {
+      height: 0.5rem;
+      border-radius: 0.25rem;
+    }
+    .table thead th {
+      border-bottom: 2px solid #0d6efd;
+    }
+    .table td, .table th {
+      vertical-align: middle;
+    }
+    .btn-primary {
+      border-radius: 0.25rem;
+      padding: 0.5rem 1.25rem;
+    }
 
+    /* Summary Boxes */
+    .summary-box {
+      color: #fff;
+      border-radius: 0.5rem;
+      padding: 1.5rem;
+      box-shadow: 0 0.25rem 1rem rgb(0 0 0 / 0.1);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-weight: 600;
+      font-size: 1.2rem;
+    }
+    .summary-icon {
+      font-size: 2.5rem;
+      opacity: 0.8;
+    }
+    .summary-appointments { background: #0d6efd; }
+    .summary-doctors { background: #198754; }
+    .summary-patients { background: #ffc107; color: #212529; }
+    .summary-revenue { background: #dc3545; }
+  </style>
 <body>
   <!--  Body Wrapper -->
   <div class="page-wrapper" id="main-wrapper" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full"
@@ -57,254 +127,224 @@ $admin_name = $_SESSION['aname'];
     ?>
       <!--  Header End -->
       <div class="container-fluid">
-        <div class="row">
-            <div class="col-lg-8">
-                <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title d-flex align-items-center gap-2 mb-4">
-                            Traffic Overview
-                            <span>
-                                <iconify-icon icon="solar:question-circle-bold" class="fs-7 d-flex text-muted" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="tooltip-success" data-bs-title="Traffic Overview"></iconify-icon>
-                            </span>
-                        </h5>
-                        <div id="traffic-overview" >
-                        </div>
-                    </div>
-                </div>
-            </div>
-        <div class="col-lg-4">
-          <div class="card">
-            <div class="card-body text-center">
-              <img src="../assets/images/backgrounds/product-tip.png" alt="image" class="img-fluid" width="205">
-              <h4 class="mt-7">Productivity Tips!</h4>
-              <p class="card-subtitle mt-2 mb-3">Duis at orci justo nulla in libero id leo
-                molestie sodales phasellus justo.</p>
-                <button class="btn btn-primary mb-3">View All Tips</button>
-            </div>
-          </div>
+         <div class="row g-4 mb-4">
+    <div class="col-sm-6 col-lg-3">
+      <div class="summary-box summary-appointments">
+        <div>
+          <div>Appointments</div>
+          <div class="fs-3">1,245</div>
         </div>
-        <div class="col-lg-8">
-          <div class="card">
-            <div class="card-body">
-              <h5 class="card-title">View by page title and screen class</h5>
-              <div class="table-responsive">
-                <table class="table text-nowrap align-middle mb-0">
-                  <thead>
-                    <tr class="border-2 border-bottom border-primary border-0"> 
-                      <th scope="col" class="ps-0">Page Title</th>
-                      <th scope="col" >Link</th>
-                      <th scope="col" class="text-center">Pageviews</th>
-                      <th scope="col" class="text-center">Page Value</th>
-                    </tr>
-                  </thead>
-                  <tbody class="table-group-divider">
-                    <tr>
-                      <th scope="row" class="ps-0 fw-medium">
-                        <span class="table-link1 text-truncate d-block">Welcome to our
-                          website</span>
-                      </th>
-                      <td>
-                        <a href="javascript:void(0)" class="link-primary text-dark fw-medium d-block">/index.php</a>
-                      </td>
-                      <td class="text-center fw-medium">18,456</td>
-                      <td class="text-center fw-medium">$2.40</td>
-                    </tr>
-                    <tr>
-                      <th scope="row" class="ps-0 fw-medium">
-                        <span class="table-link1 text-truncate d-block">Modern Admin
-                          Dashboard Template</span>
-                      </th>
-                      <td>
-                        <a href="javascript:void(0)" class="link-primary text-dark fw-medium d-block">/dashboard</a>
-                      </td>
-                      <td class="text-center fw-medium">17,452</td>
-                      <td class="text-center fw-medium">$0.97</td>
-                    </tr>
-                    <tr>
-                      <th scope="row" class="ps-0 fw-medium">
-                        <span class="table-link1 text-truncate d-block">Explore our
-                          product catalog</span>
-                      </th>
-                      <td>
-                        <a href="javascript:void(0)" class="link-primary text-dark fw-medium d-block">/product-checkout</a>
-                      </td>
-                      <td class="text-center fw-medium">12,180</td>
-                      <td class="text-center fw-medium">$7,50</td>
-                    </tr>
-                    <tr>
-                      <th scope="row" class="ps-0 fw-medium">
-                        <span class="table-link1 text-truncate d-block">Comprehensive
-                          User Guide</span>
-                      </th>
-                      <td>
-                        <a href="javascript:void(0)" class="link-primary text-dark fw-medium d-block">/docs</a>
-                      </td>
-                      <td class="text-center fw-medium">800</td>
-                      <td class="text-center fw-medium">$5,50</td>
-                    </tr>
-                    <tr>
-                      <th scope="row" class="ps-0 fw-medium border-0">
-                        <span class="table-link1 text-truncate d-block">Check out our
-                          services</span>
-                      </th>
-                      <td class="border-0">
-                        <a href="javascript:void(0)" class="link-primary text-dark fw-medium d-block">/services</a>
-                      </td>
-                      <td class="text-center fw-medium border-0">1300</td>
-                      <td class="text-center fw-medium border-0">$2,15</td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-            </div>
-          </div>
+        <i class="bi bi-calendar-check summary-icon"></i>
+      </div>
+    </div>
+    <div class="col-sm-6 col-lg-3">
+      <div class="summary-box summary-doctors">
+        <div>
+          <div>Doctors</div>
+          <div class="fs-3">85</div>
         </div>
-        <div class="col-lg-4">
-          <div class="card">
-            <div class="card-body">
-              <h5 class="card-title d-flex align-items-center gap-2 mb-5 pb-3">Sessions by
-                device<span><iconify-icon icon="solar:question-circle-bold" class="fs-7 d-flex text-muted" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="tooltip-success" data-bs-title="Locations"></iconify-icon></span>
-              </h5>
-              <div class="row">
-                <div class="col-4">
-                  <iconify-icon icon="solar:laptop-minimalistic-line-duotone" class="fs-7 d-flex text-primary"></iconify-icon>
-                  <span class="fs-11 mt-2 d-block text-nowrap">Computers</span>
-                  <h4 class="mb-0 mt-1">87%</h4>
-                </div>
-                <div class="col-4">
-                  <iconify-icon icon="solar:smartphone-line-duotone" class="fs-7 d-flex text-secondary"></iconify-icon>
-                  <span class="fs-11 mt-2 d-block text-nowrap">Smartphone</span>
-                  <h4 class="mb-0 mt-1">9.2%</h4>
-                </div>
-                <div class="col-4">
-                  <iconify-icon icon="solar:tablet-line-duotone" class="fs-7 d-flex text-success"></iconify-icon>
-                  <span class="fs-11 mt-2 d-block text-nowrap">Tablets</span>
-                  <h4 class="mb-0 mt-1">3.1%</h4>
-                </div>
-              </div>
+        <i class="bi bi-person-badge summary-icon"></i>
+      </div>
+    </div>
+    <div class="col-sm-6 col-lg-3">
+      <div class="summary-box summary-patients">
+        <div>
+          <div>Patients</div>
+          <div class="fs-3">5,678</div>
+        </div>
+        <i class="bi bi-people summary-icon"></i>
+      </div>
+    </div>
+    <div class="col-sm-6 col-lg-3">
+      <div class="summary-box summary-revenue">
+        <div>
+          <div>Revenue</div>
+          <div class="fs-3">$48,650</div>
+        </div>
+        <i class="bi bi-currency-dollar summary-icon"></i>
+      </div>
+    </div>
+  </div>
 
-              <div class="vstack gap-4 mt-7 pt-2">
-                <div>
-                  <div class="hstack justify-content-between">
-                    <span class="fs-3 fw-medium">Computers</span>
-                    <h6 class="fs-3 fw-medium text-dark lh-base mb-0">87%</h6>
-                  </div>
-                  <div class="progress mt-6" role="progressbar" aria-label="Warning example" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">
-                    <div class="progress-bar bg-primary" style="width: 100%"></div>
-                  </div>
-                </div>
+  <div class="row g-4">
+    <!-- Traffic Overview Card -->
+    <div class="col-lg-8">
+      <div class="card p-4">
+        <h5 class="card-title mb-4 d-flex align-items-center justify-content-between">
+          Traffic Overview
+          <button type="button" class="btn btn-outline-secondary btn-sm" data-bs-toggle="tooltip" title="Overview of website traffic">
+            ?
+          </button>
+        </h5>
+        <div id="trafficChart" style="height: 300px; background-color: #e9ecef; border-radius: 0.5rem; display:flex; align-items:center; justify-content:center;">
+          <!-- Chart Placeholder -->
+          <span class="text-muted">[Chart will render here]</span>
+        </div>
+      </div>
+    </div>
 
-                <div>
-                  <div class="hstack justify-content-between">
-                    <span class="fs-3 fw-medium">Smartphones</span>
-                    <h6 class="fs-3 fw-medium text-dark lh-base mb-0">9.2%</h6>
-                  </div>
-                  <div class="progress mt-6" role="progressbar" aria-label="Warning example" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">
-                    <div class="progress-bar bg-secondary" style="width: 50%"></div>
-                  </div>
-                </div>
+    <!-- Productivity Tips Card -->
+    <div class="col-lg-4">
+      <div class="card text-center p-4">
+        <img src="https://via.placeholder.com/180x120" alt="Productivity Tips" class="img-fluid mb-3 rounded" />
+        <h4 class="mb-2">Productivity Tips!</h4>
+        <p class="text-muted mb-3">Focus on high-impact tasks to boost your efficiency and results.</p>
+        <button class="btn btn-primary">View All Tips</button>
+      </div>
+    </div>
 
-                <div>
-                  <div class="hstack justify-content-between">
-                    <span class="fs-3 fw-medium">Tablets</span>
-                    <h6 class="fs-3 fw-medium text-dark lh-base mb-0">3.1%</h6>
-                  </div>
-                  <div class="progress mt-6" role="progressbar" aria-label="Warning example" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">
-                    <div class="progress-bar bg-success" style="width: 35%"></div>
-                  </div>
-                </div>
+    <!-- Page View Table -->
+    <div class="col-lg-8">
+      <div class="card p-4">
+        <h5 class="card-title mb-4">Page Views by Title</h5>
+        <div class="table-responsive">
+          <table class="table table-hover align-middle">
+            <thead>
+              <tr>
+                <th>Page Title</th>
+                <th>Link</th>
+                <th class="text-center">Pageviews</th>
+                <th class="text-center">Page Value</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Welcome to our website</td>
+                <td><a href="/index.php" class="link-primary text-decoration-none">/index.php</a></td>
+                <td class="text-center">18,456</td>
+                <td class="text-center">$2.40</td>
+              </tr>
+              <tr>
+                <td>Modern Admin Dashboard Template</td>
+                <td><a href="/dashboard" class="link-primary text-decoration-none">/dashboard</a></td>
+                <td class="text-center">17,452</td>
+                <td class="text-center">$0.97</td>
+              </tr>
+              <tr>
+                <td>Explore our product catalog</td>
+                <td><a href="/product-checkout" class="link-primary text-decoration-none">/product-checkout</a></td>
+                <td class="text-center">12,180</td>
+                <td class="text-center">$7.50</td>
+              </tr>
+              <tr>
+                <td>Comprehensive User Guide</td>
+                <td><a href="/docs" class="link-primary text-decoration-none">/docs</a></td>
+                <td class="text-center">800</td>
+                <td class="text-center">$5.50</td>
+              </tr>
+              <tr>
+                <td>Check out our services</td>
+                <td><a href="/services" class="link-primary text-decoration-none">/services</a></td>
+                <td class="text-center">1,300</td>
+                <td class="text-center">$2.15</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
 
-              </div>
-            </div>
+    <!-- Sessions by Device -->
+    <div class="col-lg-4">
+      <div class="card p-4">
+        <h5 class="card-title mb-4 d-flex align-items-center justify-content-between">
+          Sessions by Device
+          <button type="button" class="btn btn-outline-secondary btn-sm" data-bs-toggle="tooltip" title="Sessions grouped by device type">
+            ?
+          </button>
+        </h5>
+
+        <div class="mb-3">
+          <div class="d-flex justify-content-between align-items-center mb-1">
+            <span>Computers</span>
+            <strong>87%</strong>
+          </div>
+          <div class="progress">
+            <div class="progress-bar bg-primary" style="width: 87%;"></div>
           </div>
         </div>
-        <div class="col-lg-4">
-          <div class="card overflow-hidden hover-img">
-            <div class="position-relative">
-              <a href="javascript:void(0)">
-                <img src="../assets/images/blog/blog-img1.jpg" class="card-img-top" alt="matdash-img">
-              </a>
-              <span class="badge text-bg-light text-dark fs-2 lh-sm mb-9 me-9 py-1 px-2 fw-semibold position-absolute bottom-0 end-0">2
-                min Read</span>
-              <img src="../assets/images/profile/user-3.jpg" alt="matdash-img" class="img-fluid rounded-circle position-absolute bottom-0 start-0 mb-n9 ms-9" width="40" height="40" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Georgeanna Ramero">
-            </div>
-            <div class="card-body p-4">
-              <span class="badge text-bg-light fs-2 py-1 px-2 lh-sm  mt-3">Social</span>
-              <a class="d-block my-4 fs-5 text-dark fw-semibold link-primary" href="">As yen tumbles, gadget-loving
-                Japan goes
-                for secondhand iPhones</a>
-              <div class="d-flex align-items-center gap-4">
-                <div class="d-flex align-items-center gap-2">
-                  <i class="ti ti-eye text-dark fs-5"></i>9,125
-                </div>
-                <div class="d-flex align-items-center gap-2">
-                  <i class="ti ti-message-2 text-dark fs-5"></i>3
-                </div>
-                <div class="d-flex align-items-center fs-2 ms-auto">
-                  <i class="ti ti-point text-dark"></i>Mon, Dec 19
-                </div>
-              </div>
-            </div>
+
+        <div class="mb-3">
+          <div class="d-flex justify-content-between align-items-center mb-1">
+            <span>Smartphones</span>
+            <strong>9.2%</strong>
+          </div>
+          <div class="progress">
+            <div class="progress-bar bg-secondary" style="width: 9.2%;"></div>
           </div>
         </div>
-        <div class="col-lg-4">
-          <div class="card overflow-hidden hover-img">
-            <div class="position-relative">
-              <a href="javascript:void(0)">
-                <img src="../assets/images/blog/blog-img2.jpg" class="card-img-top" alt="matdash-img">
-              </a>
-              <span class="badge text-bg-light text-dark fs-2 lh-sm mb-9 me-9 py-1 px-2 fw-semibold position-absolute bottom-0 end-0">2
-                min Read</span>
-              <img src="../assets/images/profile/user-2.jpg" alt="matdash-img" class="img-fluid rounded-circle position-absolute bottom-0 start-0 mb-n9 ms-9" width="40" height="40" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Georgeanna Ramero">
-            </div>
-            <div class="card-body p-4">
-              <span class="badge text-bg-light fs-2 py-1 px-2 lh-sm  mt-3">Gadget</span>
-              <a class="d-block my-4 fs-5 text-dark fw-semibold link-primary" href="">Intel loses bid to revive
-                antitrust case
-                against patent foe Fortress</a>
-              <div class="d-flex align-items-center gap-4">
-                <div class="d-flex align-items-center gap-2">
-                  <i class="ti ti-eye text-dark fs-5"></i>4,150
-                </div>
-                <div class="d-flex align-items-center gap-2">
-                  <i class="ti ti-message-2 text-dark fs-5"></i>38
-                </div>
-                <div class="d-flex align-items-center fs-2 ms-auto">
-                  <i class="ti ti-point text-dark"></i>Sun, Dec 18
-                </div>
-              </div>
-            </div>
+
+        <div class="mb-3">
+          <div class="d-flex justify-content-between align-items-center mb-1">
+            <span>Tablets</span>
+            <strong>3.1%</strong>
+          </div>
+          <div class="progress">
+            <div class="progress-bar bg-success" style="width: 3.1%;"></div>
           </div>
         </div>
-        <div class="col-lg-4">
-          <div class="card overflow-hidden hover-img">
-            <div class="position-relative">
-              <a href="javascript:void(0)">
-                <img src="../assets/images/blog/blog-img3.jpg" class="card-img-top" alt="matdash-img">
-              </a>
-              <span class="badge text-bg-light text-dark fs-2 lh-sm mb-9 me-9 py-1 px-2 fw-semibold position-absolute bottom-0 end-0">2
-                min Read</span>
-              <img src="../assets/images/profile/user-3.jpg" alt="matdash-img" class="img-fluid rounded-circle position-absolute bottom-0 start-0 mb-n9 ms-9" width="40" height="40" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Georgeanna Ramero">
-            </div>
-            <div class="card-body p-4">
-              <span class="badge text-bg-light fs-2 py-1 px-2 lh-sm  mt-3">Health</span>
-              <a class="d-block my-4 fs-5 text-dark fw-semibold link-primary" href="">COVID outbreak deepens as more
-                lockdowns
-                loom in China</a>
-              <div class="d-flex align-items-center gap-4">
-                <div class="d-flex align-items-center gap-2">
-                  <i class="ti ti-eye text-dark fs-5"></i>9,480
-                </div>
-                <div class="d-flex align-items-center gap-2">
-                  <i class="ti ti-message-2 text-dark fs-5"></i>12
-                </div>
-                <div class="d-flex align-items-center fs-2 ms-auto">
-                  <i class="ti ti-point text-dark"></i>Sat, Dec 17
+
+      </div>
+    </div>
+
+    <!-- Latest Articles -->
+    <div class="col-lg-12">
+      <div class="card p-4">
+        <h5 class="card-title mb-4">Latest Articles</h5>
+        <div class="row g-3">
+          <div class="col-md-4">
+            <div class="card h-100 shadow-sm">
+              <img src="https://via.placeholder.com/350x180" class="card-img-top" alt="Article 1" />
+              <div class="card-body">
+                <span class="badge bg-info mb-2">Social</span>
+                <h6 class="card-title">
+                  <a href="#" class="text-decoration-none text-dark">As yen tumbles, gadget-loving Japan goes for secondhand iPhones</a>
+                </h6>
+                <div class="d-flex justify-content-between text-muted fs-7 mt-3">
+                  <small><i class="bi bi-eye"></i> 9,125</small>
+                  <small><i class="bi bi-chat-dots"></i> 3</small>
+                  <small>Dec 19</small>
                 </div>
               </div>
             </div>
           </div>
+          <div class="col-md-4">
+            <div class="card h-100 shadow-sm">
+              <img src="https://via.placeholder.com/350x180" class="card-img-top" alt="Article 2" />
+              <div class="card-body">
+                <span class="badge bg-warning mb-2">Gadget</span>
+                <h6 class="card-title">
+                  <a href="#" class="text-decoration-none text-dark">Intel loses bid to revive antitrust case against patent foe Fortress</a>
+                </h6>
+                <div class="d-flex justify-content-between text-muted fs-7 mt-3">
+                  <small><i class="bi bi-eye"></i> 6,362</small>
+                  <small><i class="bi bi-chat-dots"></i> 2</small>
+                  <small>Dec 17</small>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="card h-100 shadow-sm">
+              <img src="https://via.placeholder.com/350x180" class="card-img-top" alt="Article 3" />
+              <div class="card-body">
+                <span class="badge bg-success mb-2">Android</span>
+                <h6 class="card-title">
+                  <a href="#" class="text-decoration-none text-dark">New AI chatbot could learn from your brainwaves</a>
+                </h6>
+                <div class="d-flex justify-content-between text-muted fs-7 mt-3">
+                  <small><i class="bi bi-eye"></i> 3,205</small>
+                  <small><i class="bi bi-chat-dots"></i> 1</small>
+                  <small>Dec 15</small>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
+      </div>
+    </div>
+  </div>
+      </div>
         <div class="py-6 px-6 text-center">
           <p class="mb-0 fs-4">Design and Developed by <a href="https://adminmart.com/" target="_blank"
               class="pe-1 text-primary text-decoration-underline">AdminMart.com</a>Distributed by <a href="https://themewagon.com/" target="_blank"

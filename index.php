@@ -34,7 +34,11 @@
     <!-- Template Stylesheet -->
     <link href="css/style.css" rel="stylesheet">
 </head>
-
+    <style>
+     body::-webkit-scrollbar {
+     display: none; 
+    }
+    </style>
 <body>
     <!-- Spinner Start -->
     <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
@@ -253,7 +257,7 @@
                                         <i class="fa fa-user-md text-primary"></i>
                                     </div>
                                     <div class="ms-4">
-                                        <p class="text-white mb-2">Experience</p>
+                                            <p class="text-white mb-2">Experience</p>
                                         <h5 class="text-white mb-0">Doctors</h5>
                                     </div>
                                 </div>

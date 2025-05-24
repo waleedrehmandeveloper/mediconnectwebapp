@@ -1,115 +1,125 @@
 <?php
-echo"
+echo "
 <nav class='sidebar-nav scroll-sidebar' data-simplebar=''>
-          <ul id='sidebarnav'>
-            <li class='nav-small-cap'>
-              <i class='ti ti-dots nav-small-cap-icon fs-6'></i>
-              <span class='hide-menu'>Home</span>
-            </li>
-            <li class='sidebar-item'>
-              <a class='sidebar-link' href='./index.php' aria-expanded='false'>
-                <span>
-                  <iconify-icon icon='solar:home-smile-bold-duotone' class='fs-6'></iconify-icon>
-                </span>
-                <span class='hide-menu'>Dashboard</span>
-              </a>
-            </li>
-            <li class='nav-small-cap'>
-              <i class='ti ti-dots nav-small-cap-icon fs-6'></i>
-              <span class='hide-menu'>UI COMPONENTS</span>
-            </li>
-            <li class='sidebar-item'>
-              <a class='sidebar-link' href='./ui-buttons.php' aria-expanded='false'>
-                <span>
-                  <iconify-icon icon='solar:layers-minimalistic-bold-duotone' class='fs-6'></iconify-icon>
-                </span>
-                <span class='hide-menu'>Buttons</span>
-              </a>
-            </li>
-            <li class='sidebar-item'>
-              <a class='sidebar-link' href='./ui-alerts.php' aria-expanded='false'>
-                <span>
-                  <iconify-icon icon='solar:danger-circle-bold-duotone' class='fs-6'></iconify-icon>
-                </span>
-                <span class='hide-menu'>Alerts</span>
-              </a>
-            </li>
-            <li class='sidebar-item'>
-              <a class='sidebar-link' href='./ui-card.php' aria-expanded='false'>
-                <span>
-                  <iconify-icon icon='solar:bookmark-square-minimalistic-bold-duotone' class='fs-6'></iconify-icon>
-                </span>
-                <span class='hide-menu'>Card</span>
-              </a>
-            </li>
-            <li class='sidebar-item'>
-              <a class='sidebar-link' href='./ui-forms.php' aria-expanded='false'>
-                <span>
-                  <iconify-icon icon='solar:file-text-bold-duotone' class='fs-6'></iconify-icon>
-                </span>
-                <span class='hide-menu'>Forms</span>
-              </a>
-            </li>
-            <li class='sidebar-item'>
-              <a class='sidebar-link' href='./ui-typography.php' aria-expanded='false'>
-                <span>
-                  <iconify-icon icon='solar:text-field-focus-bold-duotone' class='fs-6'></iconify-icon>
-                </span>
-                <span class='hide-menu'>Typography</span>
-              </a>
-            </li>
-            <li class='nav-small-cap'>
-              <iconify-icon icon='solar:menu-dots-linear' class='nav-small-cap-icon fs-6'></iconify-icon>
-              <span class='hide-menu'>AUTH</span>
-            </li>
-            <li class='sidebar-item'>
-              <a class='sidebar-link' href='./authentication-login.php' aria-expanded='false'>
-                <span>
-                  <iconify-icon icon='solar:login-3-bold-duotone' class='fs-6'></iconify-icon>
-                </span>
-                <span class='hide-menu'>Login</span>
-              </a>
-            </li>
-            <li class='sidebar-item'>
-              <a class='sidebar-link' href='./authentication-register.php' aria-expanded='false'>
-                <span>
-                  <iconify-icon icon='solar:user-plus-rounded-bold-duotone' class='fs-6'></iconify-icon>
-                </span>
-                <span class='hide-menu'>Register</span>
-              </a>
-            </li>
-            <li class='nav-small-cap'>
-              <iconify-icon icon='solar:menu-dots-linear' class='nav-small-cap-icon fs-4'></iconify-icon>
-              <span class='hide-menu'>EXTRA</span>
-            </li>
-            <li class='sidebar-item'>
-              <a class='sidebar-link' href='./icon-tabler.php' aria-expanded='false'>
-                <span>
-                  <iconify-icon icon='solar:sticker-smile-circle-2-bold-duotone' class='fs-6'></iconify-icon>
-                </span>
-                <span class='hide-menu'>Icons</span>
-              </a>
-            </li>
-            <li class='sidebar-item'>
-              <a class='sidebar-link' href='./sample-page.php' aria-expanded='false'>
-                <span>
-                  <iconify-icon icon='solar:planet-3-bold-duotone' class='fs-6'></iconify-icon>
-                </span>
-                <span class='hide-menu'>Sample Page</span>
-              </a>
-            </li>
-          </ul>
-          <div class='unlimited-access hide-menu bg-primary-subtle position-relative mb-7 mt-7 rounded-3'> 
-            <div class='d-flex'>
-              <div class='unlimited-access-title me-3'>
-                <h6 class='fw-semibold fs-4 mb-6 text-dark w-75'>Upgrade to pro</h6>
-                <a href='#' target='_blank' class='btn btn-primary fs-2 fw-semibold lh-sm'>Buy Pro</a>
-              </div>
-              <div class='unlimited-access-img'>
-                <img src='../assets/images/backgrounds/rocket.png' alt='' class='img-fluid'>
-              </div>
-            </div>
-          </div>
-        </nav>
-"
+  <ul id='sidebarnav'>
+
+    <!-- Dashboard -->
+    <li class='nav-small-cap'>
+      <i class='ti ti-dots nav-small-cap-icon fs-6'></i>
+      <span class='hide-menu'>MAIN</span>
+    </li>
+    <li class='sidebar-item'>
+      <a class='sidebar-link' href='index.php' aria-expanded='false'>
+        <span>
+          <iconify-icon icon='solar:home-smile-bold-duotone' class='fs-6'></iconify-icon>
+        </span>
+        <span class='hide-menu'>Dashboard</span>
+      </a>
+    </li>
+
+    <!-- Doctors -->
+    <li class='nav-small-cap'>
+      <i class='ti ti-dots nav-small-cap-icon fs-6'></i>
+      <span class='hide-menu'>MANAGE DATA</span>
+    </li>
+    <li class='sidebar-item'>
+      <a class='sidebar-link' href='doctor.php' aria-expanded='false'>
+        <span>
+          <iconify-icon icon='solar:heart-bold-duotone' class='fs-6'></iconify-icon>
+        </span>
+        <span class='hide-menu'>Doctors</span>
+      </a>
+    </li>
+
+    <!-- Patients -->
+    <li class='sidebar-item'>
+      <a class='sidebar-link' href='patient.php' aria-expanded='false'>
+        <span>
+          <iconify-icon icon='solar:user-bold-duotone' class='fs-6'></iconify-icon>
+        </span>
+        <span class='hide-menu'>Patients</span>
+      </a>
+    </li>
+
+    <!-- Cities -->
+    <li class='sidebar-item'>
+      <a class='sidebar-link' href='cities.php' aria-expanded='false'>
+        <span>
+          <iconify-icon icon='solar:map-point-bold-duotone' class='fs-6'></iconify-icon>
+        </span>
+        <span class='hide-menu'>Cities</span>
+      </a>
+    </li>
+
+    <!-- Appointments -->
+    <li class='sidebar-item'>
+      <a class='sidebar-link' href='appointment.php' aria-expanded='false'>
+        <span>
+          <iconify-icon icon='solar:calendar-mark-bold-duotone' class='fs-6'></iconify-icon>
+        </span>
+        <span class='hide-menu'>Appointments</span>
+      </a>
+    </li>
+
+    <!-- Manage Disease -->
+    <li class='nav-small-cap'>
+      <i class='ti ti-dots nav-small-cap-icon fs-6'></i>
+      <span class='hide-menu'>MANAGE DISEASE</span>
+    </li>
+    <li class='sidebar-item'>
+      <a class='sidebar-link' href='add_disease.php' aria-expanded='false'>
+        <span>
+          <iconify-icon icon='solar:document-add-bold-duotone' class='fs-6'></iconify-icon>
+        </span>
+        <span class='hide-menu'>Add Disease</span>
+      </a>
+    </li>
+    <li class='sidebar-item'>
+      <a class='sidebar-link' href='disease_list.php' aria-expanded='false'>
+        <span>
+          <iconify-icon icon='solar:virus-bold-duotone' class='fs-6'></iconify-icon>
+        </span>
+        <span class='hide-menu'>Disease List</span>
+      </a>
+    </li>
+
+    <!-- News -->
+   <!-- News -->
+<li class='nav-small-cap'>
+  <i class='ti ti-dots nav-small-cap-icon fs-6'></i>
+  <span class='hide-menu'>MANAGE NEWS</span>
+</li>
+<li class='sidebar-item'>
+  <a class='sidebar-link' href='add_news.php' aria-expanded='false'>
+    <span>
+      <iconify-icon icon='solar:document-add-bold-duotone' class='fs-6'></iconify-icon>
+    </span>
+    <span class='hide-menu'>Add News</span>
+  </a>
+</li>
+<li class='sidebar-item'>
+  <a class='sidebar-link' href='news_list.php' aria-expanded='false'>
+    <span>
+     <iconify-icon icon='solar:news-bold-duotone' class='fs-4 me-2'></iconify-icon>
+    </span>
+    <span class='hide-menu'>News List</span>
+  </a>
+</li>
+    <!-- Logout -->
+    <li class='nav-small-cap'>
+      <i class='ti ti-dots nav-small-cap-icon fs-6'></i>
+      <span class='hide-menu'>ACCOUNT</span>
+    </li>
+    <li class='sidebar-item'>
+      <a class='sidebar-link' href='logout.php' aria-expanded='false'>
+        <span>
+          <iconify-icon icon='solar:logout-bold-duotone' class='fs-6'></iconify-icon>
+        </span>
+        <span class='hide-menu'>Logout</span>
+      </a>
+    </li>
+
+  </ul>
+</nav>
+";
 ?>

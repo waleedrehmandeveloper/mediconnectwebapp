@@ -1,4 +1,5 @@
  <?php
+        session_start();
           if(isset($_POST['signin'])){
             include('connection.php');
             session_start();
@@ -20,6 +21,7 @@
             if(mysqli_num_rows($patresult)> 0){
               $patient= mysqli_fetch_assoc($patresult);
               $_SESSION['pname']= $patient['name'];
+              $_SESSION['patientid']= $patient['id'];
               $_SESSION['role']= $patient['role'];
               header('location: index.php');
               exit();
@@ -131,7 +133,7 @@
               <input type="password" class="form-control" id="password" name="password" required placeholder="Enter your password">
             </div>
             <div class="d-grid mb-3">
-              <button type="submit" name="signin" class="btn btn-primary">🔐 Sign In</button>
+              <input type="submit" name="signin" class="btn btn-primary">🔐 Sign In</input>
             </div>
             <p class="text-center small">Don't have an account? <a href="signup.php">Sign up here</a></p>
           </form>

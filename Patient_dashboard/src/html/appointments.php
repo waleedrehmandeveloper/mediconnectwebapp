@@ -1,5 +1,10 @@
+<?php
+  session_start();
+  $patient_id = $_SESSION['patientid'];
+?>
 <!doctype html>
 <html lang="en">
+
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -18,7 +23,7 @@
       <div>
         <div class="brand-logo d-flex align-items-center justify-content-between">
           <a href="./index.php" class="text-nowrap logo-img">
-            <img class="w-100" src="../assets/images/logos/mediconnect_logo.png" alt="" />
+            <img src="../assets/images/logos/logo-light.svg" alt="" />
           </a>
           <div class="close-btn d-xl-none d-block sidebartoggler cursor-pointer" id="sidebarCollapse">
             <i class="ti ti-x fs-8"></i>
@@ -37,12 +42,12 @@
     <div class="body-wrapper">
       <!--  Header Start -->
       <?php
-      include("header.php");
-      ?>
+       include('header.php');
+       ?>
       <!--  Header End -->
-       <div class="container-fluid">
-    <div class="row">
-      <h3>Appointments</h3>
+      <div class="container-fluid">
+       
+  <div class="container my-5">
     <table class="table table-bordered table-striped">
       <thead class="table-dark text-center">
         <tr>
@@ -61,7 +66,7 @@
 
         $query = "SELECT appointments.*, doctor_register.name AS doctor_name 
                   FROM appointments 
-                  JOIN doctor_register ON appointments.doctor_id = doctor_register.id";
+                  JOIN doctor_register ON appointments.doctor_id = doctor_register.id where patient_id= $patient_id";
 
         $result = mysqli_query($conn, $query);
 
@@ -88,11 +93,9 @@
             echo "<tr><td colspan='8'>No appointments found.</td></tr>";
         }
       ?>
-
       </tbody>
     </table>
-    </div>
-  </div>       
+  </div>
   <script src="../assets/libs/jquery/dist/jquery.min.js"></script>
   <script src="../assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
   <script src="../assets/libs/simplebar/dist/simplebar.js"></script>

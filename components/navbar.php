@@ -1,4 +1,3 @@
-
     <!-- Topbar Start -->
     <div class="container-fluid bg-light p-0 wow fadeIn" data-wow-delay="0.1s">
         <div class="row gx-0 d-none d-lg-flex">
@@ -72,7 +71,7 @@
 
         <!-- Variant 2: If patient is logged in, show patient profile dropdown -->
        <?php
-if (isset($_SESSION['role']) && $_SESSION['role'] === "doctor") {
+    if (isset($_SESSION['role']) && $_SESSION['role'] === "doctor") {
     echo "
     <div class='d-none d-lg-flex' id='doctorProfile' style='display:block;'>
         <div class='nav-item dropdown'>
