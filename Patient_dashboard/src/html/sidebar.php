@@ -27,14 +27,6 @@ echo"
               </a>
             </li>
             <li class='sidebar-item'>
-              <a class='sidebar-link' href='edit_profile.php' aria-expanded='false'>
-                <span>
-                  <iconify-icon icon='solar:danger-circle-bold-duotone' class='fs-6'></iconify-icon>
-                </span>
-                <span class='hide-menu'>Edit Profile</span>
-              </a>
-            </li>
-            <li class='sidebar-item'>
               <a class='sidebar-link' href='appointments.php' aria-expanded='false'>
                 <span>
                   <iconify-icon icon='solar:danger-circle-bold-duotone' class='fs-6'></iconify-icon>

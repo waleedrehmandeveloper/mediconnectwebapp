@@ -4,12 +4,11 @@ session_start();
 include("connection.php");
 
 if (!isset($_SESSION['patientid']) || $_SESSION['role'] != 'patient') {
-    header("Location: index.php");
+    header("location: index.php");
     exit();
 }
 
 $patient_id = $_SESSION['patientid'];
-
 
 $doctor_id = $_GET['id'];
 ?>
@@ -30,7 +29,7 @@ $doctor_id = $_GET['id'];
     <!-- Google Web Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500&family=Roboto:wght@500;700;900&display=swap" rel="stylesheet"> 
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500&family=Roboto:wght@500;700;900&display=swap" rel="stylesheet">
 
     <!-- Icon Font Stylesheet -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
@@ -46,21 +45,26 @@ $doctor_id = $_GET['id'];
 
     <!-- Template Stylesheet -->
     <link href="css/style.css" rel="stylesheet">
+    <style>
+        body::-webkit-scrollbar {
+            display: none;
+        }
+    </style>
 </head>
 
 <body>
     <!-- Spinner Start -->
-    <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+    <!-- <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
         <div class="spinner-grow text-primary" style="width: 3rem; height: 3rem;" role="status">
             <span class="sr-only">Loading...</span>
         </div>
-    </div>
+    </div> -->
     <!-- Spinner End -->
 
 
     <!-- Topbar Start -->
     <?php
-        include("components/navbar.php")
+    include("components/navbar.php")
     ?>
     <!-- Navbar End -->
 
@@ -79,9 +83,12 @@ $doctor_id = $_GET['id'];
         </div>
     </div>
     <!-- Page Header End -->
-
-
     <!-- Appointment Start -->
+     <?php
+        $querydf = "SELECT phone,email FROM doctor_register";
+        $resultdf = mysqli_query($conn,$querydf);
+        $rowdf = mysqli_fetch_assoc($resultdf);
+     ?>
     <div class="container-xxl py-5">
         <div class="container">
             <div class="row g-5">
@@ -90,92 +97,166 @@ $doctor_id = $_GET['id'];
                     <h1 class="mb-4">Make An Appointment To Visit Our Doctor</h1>
                     <p class="mb-4">Tempor erat elitr rebum at clita. Diam dolor diam ipsum sit. Aliqu diam amet diam et eos. Clita erat ipsum et lorem et sit, sed stet lorem sit clita duo justo magna dolore erat amet</p>
                     <div class="bg-light rounded d-flex align-items-center p-5 mb-4">
-                        <div class="d-flex flex-shrink-0 align-items-center justify-content-center rounded-circle bg-white" style="width: 55px; height: 55px;">
-                            <i class="fa fa-phone-alt text-primary"></i>
+                        <div title="Direct Call" class="d-flex flex-shrink-0 align-items-center justify-content-center rounded-circle bg-white" style="width: 55px; height: 55px;">
+                            <a href="tel:<?php echo $rowdf['phone']; ?>">
+                                <i class="fa fa-phone text-primary"></i>
+                            </a>
                         </div>
                         <div class="ms-4">
                             <p class="mb-2">Call Us Now</p>
-                            <h5 class="mb-0">+012 345 6789</h5>
+                            <h5 class="mb-0"><?php echo $rowdf['phone'] ?></h5>
                         </div>
                     </div>
                     <div class="bg-light rounded d-flex align-items-center p-5">
-                        <div class="d-flex flex-shrink-0 align-items-center justify-content-center rounded-circle bg-white" style="width: 55px; height: 55px;">
-                            <i class="fa fa-envelope-open text-primary"></i>
+                        <div title="Send Email" class="d-flex flex-shrink-0 align-items-center justify-content-center rounded-circle bg-white" style="width: 55px; height: 55px;">
+                        <i class="fa fa-envelope text-primary"></i>
                         </div>
                         <div class="ms-4">
                             <p class="mb-2">Mail Us Now</p>
-                            <h5 class="mb-0">info@example.com</h5>
+                            <h5 class="mb-0"><?php echo $rowdf['email'] ?></h5>
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.5s">
                     <div class="bg-light rounded h-100 d-flex align-items-center p-5">
-                  <form method="POST">
-                <div class="row g-3">
-                    <!-- Patient Name -->
-                    <div class="col-12 col-sm-6">
-                    <input type="text" name="patient_name" required class="form-control border-0" placeholder="Your Name" style="height: 55px;">
-                    </div>
+                        <form method='POST'>
+                            <!-- Hidden IDs -->
+                            <input type='hidden' name='doctor_id' value='<?php echo $doctor_id; ?>'>
+                            <input type='hidden' name='patient_id' value='<?php echo $patient_id; ?>'>
 
-                    <!-- Email -->
-                    <div class="col-12 col-sm-6">
-                    <input type="email" name="email" required class="form-control border-0" placeholder="Your Email" style="height: 55px;">
-                    </div>
+                    <?php
+                    $query_patient = "
+                        SELECT 
+                            patient_register.name, 
+                            patient_register.email, 
+                            patient_register.contact
+                        FROM 
+                            patient_register
+                        WHERE 
+                            patient_register.id = $patient_id
+                    ";
+                    $result_patient = mysqli_query($conn, $query_patient);
+                    $query_availability = "
+                        SELECT 
+                            available_day, 
+                            available_time_from, 
+                            available_time_to
+                        FROM 
+                            doctor_availiblity
+                        WHERE 
+                            doctor_id = $doctor_id
+                    ";
+                    $result_availability = mysqli_query($conn, $query_availability);
 
-                    <!-- Mobile (badi width ke liye pure row mein laga diya) -->
-                    <div class="col-12">
-                    <input type="text" name="mobile" required class="form-control border-0" placeholder="Your Mobile" style="height: 55px;">
-                    </div>
+                    // Render form
+                  if ($row = mysqli_fetch_assoc($result_patient)) {
+    echo "
+    <div class='row g-3'>
+        <!-- Patient Name -->
+        <div class='col-12 col-sm-6'>
+            <input readonly type='text' name='patient_name' value='" . $row['name'] . "' required class='form-control border-0' placeholder='Your Name' style='height: 55px;'>
+        </div>
 
-                    <!-- Doctor ID (hidden) -->
-                    <input type="hidden" name="doctor_id" value="<?php echo $doctor_id; ?>">
-                    <input type="hidden" name="patient_id" value="<?php echo $patient_id ; ?>">
+        <!-- Email -->
+        <div class='col-12 col-sm-6'>
+            <input readonly type='email' name='email' value='" . $row['email'] . "' required class='form-control border-0' placeholder='Your Email' style='height: 55px;'>
+        </div>
 
-                    <!-- Date -->
-                    <div class="col-12 col-sm-6">
-                    <input type="date" name="appointment_date" required class="form-control border-0" style="height: 55px;">
-                    </div>
+        <!-- Mobile -->
+        <div class='col-12'>
+            <input readonly type='text' name='mobile' value='" . $row['contact'] . "' required class='form-control border-0' placeholder='Your Mobile' style='height: 55px;'>
+        </div>
 
-                    <!-- Time -->
-                    <div class="col-12 col-sm-6">
-                    <input type="time" name="appointment_time" required class="form-control border-0" style="height: 55px;">
+        <!-- Day & Time Dropdown -->
+        <div class='col-12 col-sm-6'>
+            <select name='day_time' class='form-control border-0' required style='height: 55px; width: 350px;'>
+                <option value=''>-- Select Day & Time --</option>";
+                
+              while ($slot = mysqli_fetch_assoc($result_availability)) {
+                $day = $slot['available_day'];
+                $from = $slot['available_time_from'];
+                $to = $slot['available_time_to'];
+                echo "<option value='{$day}|{$from} to {$to}'>{$day} - {$from} to {$to}</option>";
+            }
+
+                echo "
+                        </select>
                     </div>
 
                     <!-- Problem Description -->
-                    <div class="col-12">
-                    <textarea name="message" class="form-control border-0" rows="5" placeholder="Describe your problem"></textarea>
+                    <div class='col-12'>
+                        <textarea name='message' class='form-control border-0' rows='5' placeholder='Describe your problem'></textarea>
                     </div>
 
                     <!-- Submit Button -->
-                    <div class="col-12">
-                    <input name="send" type="submit" class="btn btn-primary w-100 py-3" value="Send Appointment"></input>
+                    <div class='col-12'>
+                        <input name='send' type='submit' class='btn btn-primary w-100 py-3' value='Send Appointment'>
                     </div>
                 </div>
-                </form>
-               <?php
-                if (isset($_POST['send'])) {
+                ";
+            }
+            else {
+                    echo "<p>Patient data not found.</p>";
+               }
+              ?>
+             </form>
+        <?php
+        if (isset($_POST['send'])) {
+            $doctor_id = $_POST['doctor_id'];
+            $patient_id = $_POST['patient_id'];
+            $name = $_POST['patient_name'];
+            $email = $_POST['email'];
+            $phone = $_POST['mobile'];
+            $message = $_POST['message'];
 
-                $docid = $_POST['doctor_id'];
-                $name = $_POST['patient_name'];
-                $pat_id = $_POST['patient_id'];
-                $email = $_POST['email'];
-                $phone = $_POST['mobile'];
-                $app_date = $_POST['appointment_date'];
-                $app_time = $_POST['appointment_time'];
-
-                $query = "INSERT INTO appointments (patient_id, doctor_id, appointment_day, appointment_time, created_at, name, email, phone)
-                        VALUES ('$pat_id', '$docid', '$app_date', '$app_time', NOW(), '$name', '$email', '$phone')";
-                        
-                $result = mysqli_query($conn, $query);
-
-                if ($result) {
-                    echo "<script>alert('Appointment booked successfully');</script>";
-                } else {
-                    echo "<script>alert('Failed to book appointment');</script>";
-                }
+          $day_time = explode("|", $_POST['day_time']);
+            if (count($day_time) == 2) {
+                $appointment_day = date('Y-m-d', strtotime("next " . trim($day_time[0])));
+                $appointment_time = trim($day_time[1]);
+            } else {
+                $appointment_day = "";
+                $appointment_time = "";
             }
 
-            ?>
+
+
+            $created_at = date('Y-m-d H:i:s');
+            $status = "Pending";
+
+            if (!empty($appointment_day) && !empty($appointment_time)) {
+    $query = "INSERT INTO appointments (
+        patient_id,
+        doctor_id,
+        appointment_day,
+        appointment_time,
+        name,
+        email,
+        phone,
+        status,
+        message
+    ) VALUES (
+        '$patient_id',
+        '$doctor_id',
+        '$appointment_day',
+        NOW(),
+        '$name',
+        '$email',
+        '$phone',
+        'Pending',
+        '$message'
+    )";
+    $result = mysqli_query($conn, $query);
+}
+
+
+    if ($result) {
+        echo "<script>alert('Appointment booked successfully');</script>";
+    } else {
+        echo "<script>alert('Failed to book appointment');</script>";
+    }
+}
+?>
+
 
                     </div>
                 </div>
@@ -183,7 +264,7 @@ $doctor_id = $_GET['id'];
         </div>
     </div>
     <!-- Appointment End -->
-        
+
 
     <!-- Footer Start -->
     <div class="container-fluid bg-dark text-light footer mt-5 pt-5 wow fadeIn" data-wow-delay="0.1s">

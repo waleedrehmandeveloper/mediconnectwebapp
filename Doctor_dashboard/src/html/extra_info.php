@@ -1,5 +1,13 @@
 <?php
 session_start();
+if (
+    !isset($_SESSION['dname']) || 
+    !isset($_SESSION['role']) || 
+    $_SESSION['role'] !== "doctor"
+) {
+    header("Location: index.php");
+    exit();
+}
 ?>
 <!doctype html>
 <html lang="en">
@@ -22,8 +30,8 @@ session_start();
     <aside class="left-sidebar">
       <!-- Sidebar scroll-->
       <div>
-        <div class="brand-logo d-flex align-items-center justify-content-between">
-          <a href="./index.php" class="text-nowrap logo-img">
+         <div class="brand-logo d-flex align-items-center justify-content-between">
+          <a href="../../../index.php" class="text-nowrap logo-img">
             <img class="w-100" src="../assets/images/logos/mediconnect_logo.png" alt="" />
           </a>
           <div class="close-btn d-xl-none d-block sidebartoggler cursor-pointer" id="sidebarCollapse">
@@ -130,72 +138,73 @@ session_start();
   </div>
 </div>
 <?php
-if(isset($_POST['update'])){
+if (isset($_POST['update'])) {
   include("connection.php");
-$doctorid= $_SESSION['doctor_id'];
-$full_name      = $_POST['full_name'];
-$phone          = $_POST['phone'];
-$location       = $_POST['location'];
-$postal_code    = $_POST['postal_code'];
-$clinic_address = $_POST['clinic_address'];
-$category       = $_POST['category'];
-$qualification  = $_POST['qualification'];
-$experience     = $_POST['experience'];
-$gender         = $_POST['gender'];
-$bio            = $_POST['bio'];
-$image = $_FILES['profile_pic'];
- if (
-  empty($full_name) || 
-  empty($phone) || 
-  empty($location) || 
-  empty($postal_code) || 
-  empty($clinic_address) || 
-  empty($category) || 
-  empty($qualification) || 
-  empty($experience) || 
-  empty($gender) || 
-  empty($bio) || 
-  empty($_FILES['profile_pic']['name']) 
-) {
-  echo "
-    <script>
-      alert('Please fill the data first');
-    </script>
-  ";
-}
+  session_start(); // Make sure session is started
+  $doctorid = $_SESSION['doctor_id'];
 
+  $full_name      = $_POST['full_name'];
+  $phone          = $_POST['phone'];
+  $location       = $_POST['location'];
+  $postal_code    = $_POST['postal_code'];
+  $clinic_address = $_POST['clinic_address'];
+  $category       = $_POST['category'];
+  $qualification  = $_POST['qualification'];
+  $experience     = $_POST['experience'];
+  $gender         = $_POST['gender'];
+  $bio            = $_POST['bio'];
 
-$query = "UPDATE doctor_register 
-          SET name='$full_name', 
-              phone='$phone', 
-              location='$location', 
-              postal_code='$postal_code', 
-              clinic_address='$clinic_address', 
-              category='$category', 
-              qualification='$qualification', 
-              experience='$experience',
-              bio='$bio', gender='$gender'
-          WHERE id=$doctorid";
+  $image = $_FILES['profile_pic'];
+  $image_name = $image['name'];
+  $tmp_name = $image['tmp_name'];
+  $new_name = rand(0, 99) . "_" . basename($image_name); 
+  $upload_path = "imagedata/" . $new_name; 
 
-          $result = mysqli_query($conn, $query);
-    // FOR IMAGE UPLOADIING
+  // Validation
+  if (
+    empty($full_name) || 
+    empty($phone) || 
+    empty($location) || 
+    empty($postal_code) || 
+    empty($clinic_address) || 
+    empty($category) || 
+    empty($qualification) || 
+    empty($experience) || 
+    empty($gender) || 
+    empty($bio) || 
+    empty($image_name)
+  ) {
+    echo "<script>alert('Please fill the data first');</script>";
+  } else {
+    $query = "UPDATE doctor_register 
+              SET name='$full_name', 
+                  phone='$phone', 
+                  location='$location', 
+                  postal_code='$postal_code', 
+                  clinic_address='$clinic_address', 
+                  category='$category', 
+                  qualification='$qualification', 
+                  experience='$experience',
+                  bio='$bio', 
+                  gender='$gender'
+              WHERE id=$doctorid";
+    
+    $result = mysqli_query($conn, $query);
 
-    $image = $_FILES['profile_pic'];
-    $image_name = $image['name'];
-    $tmp_name = $image['tmp_name'];
-    $new_name = rand(0,99). "_" .$image_name;
-
-    $upload_path = "imagedata/" . $new_name;
-
-    if (move_uploaded_file($tmp_name, $upload_path)) {
-        
+    if ($result) {
+      if (move_uploaded_file($tmp_name, $upload_path)) {
         $imgquery = "UPDATE doctor_register 
-                  SET profile_pic = '$upload_path' 
-                  WHERE id = $doctorid";
-        $resultimg= mysqli_query($conn,$imgquery);
+                     SET profile_pic = '$new_name' 
+                     WHERE id = $doctorid";
+        mysqli_query($conn, $imgquery);
+      } else {
+        echo "<script>alert('Image upload failed.');</script>";
+      }
     }
+  }
 }
 ?>
+a
      </section>
         <div class="py-6 px-6 text-center">
           <p class="mb-0 fs-4">Design and Developed by <a href="https://adminmart.com/" target="_blank"
@@ -205,6 +214,8 @@ $query = "UPDATE doctor_register
       </div>
     </div>
   </div>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
   <script src="../assets/libs/jquery/dist/jquery.min.js"></script>
   <script src="../assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
   <script src="../assets/libs/simplebar/dist/simplebar.js"></script>

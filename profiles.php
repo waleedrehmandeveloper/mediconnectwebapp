@@ -30,7 +30,7 @@ $fresult = mysqli_fetch_assoc($result);
   display: none; 
   }
     .profile-banner {
-      background-image: url('https://st4.depositphotos.com/9999814/24062/i/450/depositphotos_240620978-stock-photo-male-doctor-standing-hospital-office.jpg');
+      background-image: url('Doctor_dashboard/src/html/imagedata/doctor_banner2.jpeg');
       background-size: cover;
       background-position: center;
       height: 200px;
@@ -102,15 +102,13 @@ $fresult = mysqli_fetch_assoc($result);
 
 <div class="container-fluid">
   <div class="profile-banner container position-relative py-5">
-    <img src="<?php echo '../Mediconnect/Doctor_dashboard/src/html/' . $fresult['profile_pic']; ?>" alt="Doctor Image" class="profile-avatar">
+    <img src="<?php echo '../Mediconnect/Doctor_dashboard/src/html/imagedata/' . $fresult['profile_pic']; ?>" alt="Doctor Image" class="profile-avatar">
     <div class="profile-text">
-      <h1><?php echo $fresult['name']; ?></h1>
-      <span><?php echo $fresult['category']; ?> - <?php echo $fresult['location']; ?></span>
+      <h1 class="text-white"><?php echo $fresult['name']; ?></h1>
+      <span class="text-white" ><?php echo $fresult['category']; ?> - <?php echo $fresult['location']; ?></span>
     </div>
 
     <!-- Hidden file input -->
-    <input type="file" id="fileUpload" style="display: none;">
-    <button type="button" id="uploadBtn">Upload</button>
   </div>
 
   <div class="container mt-5">

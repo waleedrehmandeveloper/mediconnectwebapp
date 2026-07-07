@@ -90,6 +90,31 @@ while ($row = $result->fetch_assoc()) {
       background: white;
       box-shadow: 0 2px 6px rgba(0,0,0,0.05);
     }
+.disease-card .tooltip {
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: white;
+  color: #333;
+  padding: 8px 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 14px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  white-space: nowrap;
+
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease-in-out;
+  margin-bottom: 10px;
+  z-index: 10;
+}
+
+.disease-card:hover .tooltip {
+  opacity: 1;
+  pointer-events: auto;
+}
 
     .alphabet-bar a {
       margin: 5px;
@@ -237,10 +262,7 @@ while ($row = $result->fetch_assoc()) {
     <?php
       include('components/navbar.php');
     ?>
-<div class="theme">
-  <label>Select Theme Color:</label>
-  <input type="color" id="themeColor" value="#007bff" onchange="changeThemeColor(this.value)">
-</div>
+  
 
 <div class="alphabet-bar" id="alphabetBar">
   <a href="#" class="active" onclick="filterByLetter('#')">#</a>

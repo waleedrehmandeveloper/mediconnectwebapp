@@ -1,3 +1,18 @@
+<?php
+session_start();
+if (
+    !isset($_SESSION['aname']) ||
+    !isset($_SESSION['role']) ||
+    $_SESSION['role'] !== 'admin' ||
+    !isset($_SESSION['admin_mail'])
+) {
+    header('Location: signin.php');
+    exit();
+}
+$admin_mail = $_SESSION['admin_mail'];
+$admin_name = $_SESSION['aname'];
+?>
+
 <!doctype html>
 <html lang="en">
 <head>
@@ -18,7 +33,7 @@
       <!-- Sidebar scroll-->
       <div>
         <div class="brand-logo d-flex align-items-center justify-content-between">
-          <a href="./index.php">
+          <a href="../../../index.php" class="text-nowrap logo-img">
             <img class="w-100" src="../assets/images/logos/mediconnect_logo.png" alt="" />
           </a>
           <div class="close-btn d-xl-none d-block sidebartoggler cursor-pointer" id="sidebarCollapse">
@@ -46,105 +61,89 @@
         <div class="container py-5">
     <div class="d-flex justify-content-between align-items-center mb-4">
       <h2>Patients List</h2>
-      <!-- Add Patient Button -->
-      <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addPatientModal">
-        Add Patient
+      <!-- Button trigger modal -->
+      <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addDoctorModal">
+        Add patient
       </button>
     </div>
 
-    <!-- Patients Table -->
+    <!-- Doctor Table -->
     <div class="table-responsive">
       <table class="table table-bordered table-striped">
         <thead class="table-dark">
           <tr>
             <th>ID</th>
-            <th>Name</th>
-            <th>Gender</th>
-            <th>Age</th>
-            <th>City</th>
+            <th>Patient Name</th>
             <th>Email</th>
+            <th>City</th>
             <th>Phone</th>
+            <th>Created at</th>
             <th>Actions</th>
           </tr>
         </thead>
         <tbody>
-          <!-- Sample static patient data -->
-          <tr>
-            <td>1</td>
-            <td>Adeel Ahmed</td>
-            <td>Male</td>
-            <td>28</td>
-            <td>Lahore</td>
-            <td>adeel@gmail.com</td>
-            <td>0301-1234567</td>
-            <td>
-            <button class="btn btn-sm btn-info text-white">View Profile</button>
-            <button class="btn btn-sm btn-warning">Edit</button>
-            <button class="btn btn-sm btn-danger">Delete</button>
-            </td>
-          </tr>
-          <tr>
-            <td>2</td>
-            <td>Sana Tariq</td>
-            <td>Female</td>
-            <td>35</td>
-            <td>Karachi</td>
-            <td>sana@yahoo.com</td>
-            <td>0321-9876543</td>
-            <td>
-            <button class="btn btn-sm btn-info text-white">View Profile</button>
-            <button class="btn btn-sm btn-warning">Edit</button>
-            <button class="btn btn-sm btn-danger">Delete</button>
-            </td>
-          </tr>
+        <?php
+          include("connection.php");
+            $query = "select * from patient_register";
+            $result = mysqli_query($conn,$query);
+              if($result){
+               foreach($result as $row){
+                echo"
+                <tr>
+                <td>".$row['id']."</td>
+                <td>".$row['name']."</td>
+                <td>".$row['email']."</td>
+                <td>".$row['city']."</td>
+                <td>".$row['contact']."</td>
+                <td>".$row['date_time']."</td>
+                <td>
+                  <a href= '../../../Patient_dashboard/src/html/patient_profile.php?id=".$row['id']."' class='btn btn-sm btn-info text-white'>View Profile</a>
+                  <a href= 'delete_pat.php?id=".$row['id']."' class='btn btn-sm btn-danger'>Delete</a>
+                </td>
+              </tr>
+              ";
+               }
+              }
+        ?>
         </tbody>
       </table>
     </div>
   </div>
 
   <!-- Add Patient Modal -->
-  <div class="modal fade" id="addPatientModal" tabindex="-1" aria-labelledby="addPatientModalLabel" aria-hidden="true">
+  <div class="modal fade" id="addDoctorModal" tabindex="-1" aria-labelledby="addDoctorModalLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
-        <form>
+        <form method="POST">
           <div class="modal-header">
-            <h5 class="modal-title" id="addPatientModalLabel">Add New Patient</h5>
+            <h5 class="modal-title" id="addDoctorModalLabel">Add New Patient</h5>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
 
             <div class="mb-3">
-              <label for="patientName" class="form-label">Patient Name</label>
-              <input type="text" class="form-control" id="patientName" required>
+              <label for="PatientName" class="form-label">Name</label>
+              <input type="text" class="form-control" id="PatientName" name="name" required>
             </div>
 
             <div class="mb-3">
-              <label for="gender" class="form-label">Gender</label>
-              <select class="form-select" id="gender" required>
-                <option value="">-- Select Gender --</option>
-                <option>Male</option>
-                <option>Female</option>
-              </select>
-            </div>
-
-            <div class="mb-3">
-              <label for="age" class="form-label">Age</label>
-              <input type="number" class="form-control" id="age" required>
+              <label for="specialization" class="form-label">Email</label>
+              <input type="email" class="form-control" id="email" name="email" required>
             </div>
 
             <div class="mb-3">
               <label for="city" class="form-label">City</label>
-              <select class="form-select" id="city" required>
+              <select class="form-select" id="city" name="city" required>
                 <option value="">-- Select City --</option>
-                <option>Lahore</option>
-                <option>Karachi</option>
-                <option>Islamabad</option>
+                <option value="Lahore">Lahore</option>
+                <option value="Karachi">Karachi</option>
+                <option value="Islamabad">Islamabad</option>
               </select>
             </div>
 
             <div class="mb-3">
-              <label for="email" class="form-label">Email</label>
-              <input type="email" class="form-control" id="email" required>
+              <label for="email" class="form-label">Contact</label>
+              <input type="text" class="form-control" id="phone" name="contact" required>
             </div>
 
             <div class="mb-3">
@@ -154,24 +153,31 @@
 
           </div>
           <div class="modal-footer">
-            <button type="submit" class="btn btn-success">Save Patient</button>
+            <button type="submit" name="save_patient" class="btn btn-success">Save Patient</button>
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
           </div>
         </form>
-      </div>
-    </div>
-    </div>
-    </div>
-  </div>
+        <?php
+          include("connection.php");
 
-  <!-- Bootstrap JS Bundle -->
-          </div>
-        </div>
-        <div class="py-6 px-6 text-center">
-          <p class="mb-0 fs-4">Design and Developed by <a href="https://adminmart.com/" target="_blank"
-              class="pe-1 text-primary text-decoration-underline">AdminMart.com</a>Distributed by <a href="https://themewagon.com/" target="_blank"
-              class="pe-1 text-primary text-decoration-underline">ThemeWagon</a></p>
-        </div>
+          if (isset($_POST['save_patient'])) {
+              $name = $_POST['name'];
+              $email = $_POST['email'];
+              $contact = $_POST['contact'];
+              $city = $_POST['city'];
+
+              $query = "INSERT INTO patient_register (name, email, contact, city) 
+                        VALUES ('$name', '$email', '$contact', '$city')";
+
+              $result = mysqli_query($conn, $query);
+
+              if ($result) {
+                  echo "<script>alert('Patient added successfully'); location.href='patient.php';</script>";
+              } else {
+                  echo "<script>alert('Failed to add patient');</script>";
+              }
+          }
+          ?>
       </div>
     </div>
   </div>

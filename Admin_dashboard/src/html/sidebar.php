@@ -43,11 +43,11 @@ echo "
 
     <!-- Cities -->
     <li class='sidebar-item'>
-      <a class='sidebar-link' href='cities.php' aria-expanded='false'>
+      <a class='sidebar-link' href='contact_list.php' aria-expanded='false'>
         <span>
           <iconify-icon icon='solar:map-point-bold-duotone' class='fs-6'></iconify-icon>
         </span>
-        <span class='hide-menu'>Cities</span>
+        <span class='hide-menu'>Contact</span>
       </a>
     </li>
 
@@ -83,7 +83,11 @@ echo "
       </a>
     </li>
 
-    <!-- News -->
+   <!-- Doctor -->
+<li class='nav-small-cap'>
+  <i class='ti ti-dots nav-small-cap-icon fs-6'></i>
+  <span class='hide-menu'>MANAGE Doctors</span>
+</li>
    <!-- News -->
 <li class='nav-small-cap'>
   <i class='ti ti-dots nav-small-cap-icon fs-6'></i>

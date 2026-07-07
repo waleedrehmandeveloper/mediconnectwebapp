@@ -24,11 +24,10 @@
   <link rel="stylesheet" href="../../node_modules/simplebar/dist/simplebar.min.css">
   <link rel="stylesheet" href="../assets/css/styles.min.css" />
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
-
 </head>
   <style>
     .profile-banner {
-      background-image: url('https://www.bootdey.com/image/900x200');
+      background-image: url('images/patient_banner2.jpeg');
       background-size: cover;
       background-position: center;
       height: 200px;
@@ -68,8 +67,8 @@
       <!-- Sidebar scroll-->
       <div>
         <div class="brand-logo d-flex align-items-center justify-content-between">
-          <a href="index.php" class="text-nowrap logo-img">
-              <img src="<?php echo $patientdata['profile_pic'] ?>" alt="Banner Picture" class="profile-avatar">
+          <a href="../../../index.php" class="text-nowrap logo-img">
+            <img class="w-100" src="../assets/images/logos/mediconnect_logo.png" alt="" />
           </a>
           <div class="close-btn d-xl-none d-block sidebartoggler cursor-pointer" id="sidebarCollapse">
             <i class="ti ti-x fs-8"></i>
@@ -93,7 +92,10 @@
       <!--  Header End -->
       <div class="container-fluid">
      <div class="profile-banner">
-    <img src="<?php echo $patientdata['profile_pic'] ?>" alt="Profile Picture" class="profile-avatar">
+  <?php
+  $imageName = !empty($patientdata['profile_pic']) ? $patientdata['profile_pic'] : 'default.png';
+?>
+<img src="images/<?php echo $imageName; ?>" alt="Profile Picture" class="profile-avatar">
   </div>
   <div class="container bg-white p-4 rounded shadow profile-content">
     <h4 class="mb-4">Patient Profile</h4>
@@ -117,16 +119,14 @@
       <div class="col-md-4 info-label">City:</div>
       <div class="col-md-8 info-value"><?php echo  $patientdata['city'] ?></div>
     </div>
-    <div class="row mb-3">
-      <div class="col-md-4 info-label">Address:</div>
-      <div class="col-md-8 info-value">Street 12, Model Town, Lahore</div>
-    </div>
     <div class="text-end mt-4">
       <a href="edit_profile.php" class="btn btn-outline-primary">Edit Profile</a>
     </div>
   </div>
 
   </div>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
   <script src="../assets/libs/jquery/dist/jquery.min.js"></script>
   <script src="../assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
   <script src="../assets/libs/simplebar/dist/simplebar.js"></script>

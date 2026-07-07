@@ -62,6 +62,9 @@ $fresult= mysqli_fetch_assoc($result);
       <div class="container-fluid">
         <div class="row">
   <!-- Summary Cards -->
+   <div class="alert alert-info shadow-sm rounded">
+  <strong>Welcome Dr. <?php echo $doctor_name; ?>!</strong> Here's an overview of your day.
+  </div>
    <?php
    $totalQuery = "SELECT COUNT(*) AS total FROM appointments WHERE doctor_id = $doctorid";
    $totalResult = mysqli_query($conn, $totalQuery);
@@ -75,19 +78,29 @@ $fresult= mysqli_fetch_assoc($result);
       </div>
     </div>
   </div>
+   <?php
+   $acceptQuery = "SELECT COUNT(*) AS accept FROM appointments WHERE doctor_id = $doctorid AND status = 'Accepted'";
+   $acceptResult = mysqli_query($conn, $acceptQuery);
+   $accept = mysqli_fetch_assoc($acceptResult)['accept'];
+   ?>
   <div class="col-md-4 mb-4">
     <div class="card text-center shadow-sm">
       <div class="card-body">
         <h5 class="card-title">Accepted</h5>
-        <h2 class="text-success">8</h2>
+        <h2 class="text-success"><?php echo $accept ?></h2>
       </div>
     </div>
   </div>
+   <?php
+   $rejectQuery = "SELECT COUNT(*) AS accept FROM appointments WHERE doctor_id = $doctorid AND status = 'Rejected'";
+   $rejectResult = mysqli_query($conn, $rejectQuery);
+   $reject = mysqli_fetch_assoc($rejectResult)['accept'];
+   ?>
   <div class="col-md-4 mb-4">
     <div class="card text-center shadow-sm">
       <div class="card-body">
         <h5 class="card-title">Rejected</h5>
-        <h2 class="text-danger">4</h2>
+        <h2 class="text-danger"><?php echo $reject ?></h2>
       </div>
     </div>
   </div>
@@ -96,7 +109,7 @@ $fresult= mysqli_fetch_assoc($result);
   <div class="col-lg-4 mb-4">
     <div class="card shadow-sm">
       <div class="card-body text-center">
-      <img style="width: 100px; height: 100px; object-fit: cover;" src="<?php echo $fresult['profile_pic']; ?>" alt="Doctor Image" class="profile-avatar rounded-circle mb-2">
+      <img style="width: 100px; height: 100px; object-fit: cover;" src="imagedata/<?php echo $fresult['profile_pic']; ?>" alt="Doctor Image" class="profile-avatar rounded-circle mb-2">
         <h5 class="card-title"><?php echo $fresult['name']; ?></h5>
         <p class="text-muted mb-1"><?php echo $fresult['category']; ?></p>
         <p class="text-muted small"><?php echo $fresult['location'] ?>- Pakistan</p>
@@ -106,6 +119,22 @@ $fresult= mysqli_fetch_assoc($result);
   </div>
 
   <!-- Upcoming Appointments -->
+    <?php
+      $query = "SELECT 
+                appointments.appointment_day AS app_date,
+                appointments.appointment_time AS app_time,
+                appointments.status,
+                patient_register.name AS pname
+              FROM appointments
+              JOIN patient_register ON appointments.patient_id = patient_register.id
+              WHERE appointments.status = 'Pending'
+              ORDER BY appointments.created_at DESC
+              LIMIT 5";
+
+      $result = mysqli_query($conn, $query);
+    ?>
+
+
   <div class="col-lg-8 mb-4">
     <div class="card shadow-sm">
       <div class="card-body">
@@ -121,25 +150,21 @@ $fresult= mysqli_fetch_assoc($result);
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td>Ali Raza</td>
-                <td>2025-05-22</td>
-                <td>10:00 AM</td>
-                <td><span class="badge bg-warning">Pending</span></td>
-              </tr>
-              <tr>
-                <td>Fatima Noor</td>
-                <td>2025-05-23</td>
-                <td>02:00 PM</td>
-                <td><span class="badge bg-success">Accepted</span></td>
-              </tr>
-              <tr>
-                <td>Hassan Khan</td>
-                <td>2025-05-24</td>
-                <td>11:30 AM</td>
-                <td><span class="badge bg-danger">Rejected</span></td>
-              </tr>
-            </tbody>
+            <?php if (mysqli_num_rows($result) > 0): ?>
+              <?php while ($row = mysqli_fetch_assoc($result)): ?>
+                <tr>
+                  <td><?php echo htmlspecialchars($row['pname']); ?></td>
+                  <td><?php echo htmlspecialchars($row['app_date']); ?></td>
+                  <td><?php echo htmlspecialchars($row['app_time']); ?></td>
+                  <td>
+                    <span class="badge bg-warning"><?php echo $row['status']; ?></span>
+                  </td>
+                </tr>
+              <?php endwhile; ?>
+            <?php else: ?>
+              <tr><td colspan="4" class="text-center">No new appointments found.</td></tr>
+            <?php endif; ?>
+          </tbody>
           </table>
         </div>
       </div>
@@ -166,8 +191,9 @@ $fresult= mysqli_fetch_assoc($result);
     </div>
   </div>
 </div>
-
   </div>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
   <script src="../assets/libs/jquery/dist/jquery.min.js"></script>
   <script src="../assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
   <script src="../assets/libs/apexcharts/dist/apexcharts.min.js"></script>

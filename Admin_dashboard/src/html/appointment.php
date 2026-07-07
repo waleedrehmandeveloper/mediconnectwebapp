@@ -33,7 +33,7 @@ $admin_name = $_SESSION['aname'];
       <!-- Sidebar scroll-->
       <div>
         <div class="brand-logo d-flex align-items-center justify-content-between">
-          <a href="./index.php">
+          <a href="../../../index.php" class="text-nowrap logo-img">
             <img class="w-100" src="../assets/images/logos/mediconnect_logo.png" alt="" />
           </a>
           <div class="close-btn d-xl-none d-block sidebartoggler cursor-pointer" id="sidebarCollapse">
@@ -59,10 +59,6 @@ $admin_name = $_SESSION['aname'];
       <div class="container-fluid">
   <div class="row">
     <div class="container py-5">
-      <div class="d-flex justify-content-between align-items-center mb-4">
-        <h2>Appointments</h2>
-        <a href="add_appointment.php" class="btn btn-success">+ New Appointment</a>
-      </div>
 
       <!-- Filters -->
       <form class="row g-3 mb-4">
@@ -85,16 +81,17 @@ $admin_name = $_SESSION['aname'];
        <table class="table table-bordered table-striped">
       <thead class="table-dark text-center">
         <tr>
-          <th>s.no</th>
-          <th>Paient Name</th>
           <th>Doctor Name</th>
+          <th>Paient Name</th>
           <th>Patient Email</th>
           <th>Patient Phone</th>
+          <th>Patient Phone</th>
           <th>Appointment Day</th>
-          <th>Appointment Time</th>
+          <th>Appointment status</th>
           <th>Actions</th>
         </tr>
       </thead>
+      <tbody class="text-center">
  <?php
 include("connection.php");
 $query = "SELECT 
@@ -115,6 +112,17 @@ if (!$result) {
 
 if(mysqli_num_rows($result) > 0){
     while($row = mysqli_fetch_assoc($result)){
+    $status = $row['status'];
+    $badgeClass = '';
+
+    if ($status == 'Accepted') {
+        $badgeClass = 'text-success fw-bold';
+    } elseif ($status == 'Rejected') {
+        $badgeClass = 'text-danger fw-bold';
+    } elseif ($status == 'Pending') {
+        $badgeClass = 'text-warning text-dark';
+    }
+
         echo "<tr>
                 <td>".$row['doctor_name']."</td>
                 <td>".$row['patient_name']."</td>
@@ -122,16 +130,18 @@ if(mysqli_num_rows($result) > 0){
                 <td>".$row['phone']."</td>
                 <td>".$row['appointment_day']."</td>
                 <td>".$row['appointment_time']."</td>
+                <td class='$badgeClass'>
+                  ".$row['status']."
+                </td>
                 <td>
-                  <button class='btn btn-success btn-sm me-2'>Accept</button>
-                  <button class='btn btn-danger btn-sm'>Reject</button>
+                  <a href='appointments_delete.php?id=".$row['id']."' class='btn btn-danger btn-sm me-2'>Delete</a>
                 </td>
               </tr>";
-    }
-} else {
-    echo "<tr><td colspan='7' class='text-center'>No appointments found</td></tr>";
-}
-?>
+                }
+            } else {
+                echo "<tr><td colspan='7' class='text-center'>No appointments found</td></tr>";
+            }
+            ?>
 
       </tbody>
     </table>
@@ -139,14 +149,6 @@ if(mysqli_num_rows($result) > 0){
     </div>
   </div>
 </div>
-        <div class="py-6 px-6 text-center">
-          <p class="mb-0 fs-4">Design and Developed by <a href="https://adminmart.com/" target="_blank"
-              class="pe-1 text-primary text-decoration-underline">AdminMart.com</a>Distributed by <a href="https://themewagon.com/" target="_blank"
-              class="pe-1 text-primary text-decoration-underline">ThemeWagon</a></p>
-        </div>
-      </div>
-    </div>
-  </div>
   <script src="../assets/libs/jquery/dist/jquery.min.js"></script>
   <script src="../assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
   <script src="../assets/libs/apexcharts/dist/apexcharts.min.js"></script>

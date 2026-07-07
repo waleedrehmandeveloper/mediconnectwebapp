@@ -50,7 +50,7 @@ echo"
         <span class='hide-menu'>Appointments</span>
       </a>
     </li>
-    <li class='sidebar-item'>
+    <li class='sidebar-item mt-5'>
       <a class='sidebar-link text-danger fw-semibold' href='logout.php' aria-expanded='false' style='border-top: 1px solid #dee2e6; padding-top: 10px;'>
         <span>
           <iconify-icon icon='solar:logout-2-bold-duotone' class='fs-6'></iconify-icon>

@@ -32,8 +32,8 @@ $admin_name = $_SESSION['aname'];
     <aside class="left-sidebar">
       <!-- Sidebar scroll-->
       <div>
-        <div class="brand-logo d-flex align-items-center justify-content-between">
-          <a href="./index.php">
+         <div class="brand-logo d-flex align-items-center justify-content-between">
+          <a href="../../../index.php" class="text-nowrap logo-img">
             <img class="w-100" src="../assets/images/logos/mediconnect_logo.png" alt="" />
           </a>
           <div class="close-btn d-xl-none d-block sidebartoggler cursor-pointer" id="sidebarCollapse">
@@ -59,29 +59,82 @@ $admin_name = $_SESSION['aname'];
       <div class="container-fluid">
         <div class="row">
           <div class="container py-5">
-          <h2>Add/Edit News</h2>
-          <form action="save_news.php" method="POST">
-            <div class="mb-3">
-              <label for="newsTitle" class="form-label">Title</label>
-              <input type="text" class="form-control" id="newsTitle" name="title" required>
-            </div>
-            <div class="mb-3">
-              <label for="newsDate" class="form-label">Date</label>
-              <input type="date" class="form-control" id="newsDate" name="date" required>
-            </div>
-            <div class="mb-3">
-              <label for="newsContent" class="form-label">Content</label>
-              <textarea class="form-control" id="newsContent" name="content" rows="6" required></textarea>
-            </div>
-            <div class="mb-3">
-              <label for="newsStatus" class="form-label">Status</label>
-              <select class="form-select" id="newsStatus" name="status">
-                <option value="active" selected>Active</option>
-                <option value="inactive">Inactive</option>
-              </select>
-            </div>
-            <button type="submit" class="btn btn-primary">Save News</button>
-          </form>
+          <h2>Add News</h2>
+          <form method="POST" enctype="multipart/form-data">  
+        <div class="mb-3">
+          <label for="newsTitle" class="form-label">Title</label>
+          <input type="text" class="form-control" id="newsTitle" name="title" required>
+        </div>
+        <div class="mb-3">
+          <label for="newsContent" class="form-label">Content</label>
+          <textarea class="form-control" id="newsContent" name="content" rows="6" required></textarea>
+        </div>
+
+        <div class="mb-3">
+          <label for="cardImage" class="form-label">Card Image</label>
+          <input type="file" class="form-control" id="cardImage" name="card_image" accept="image/*" required>
+        </div>
+        <div class="mb-3">
+          <label for="bannerImage" class="form-label">Banner Image</label>
+          <input type="file" class="form-control" id="bannerImage" name="banner_image" accept="image/*" required>
+        </div>
+
+        <input name="save" type="submit" class="btn btn-primary" value="Save News">
+      </form>
+      <?php
+include("connection.php");
+
+if(isset($_POST['save'])){
+
+  $title = mysqli_real_escape_string($conn, $_POST['title']);
+  $content = mysqli_real_escape_string($conn, $_POST['content']);
+
+  $uploadDir = "../assets/images/newsimg/";
+
+  if (!is_dir($uploadDir)) {
+      mkdir($uploadDir, 0755, true);
+  }
+
+  $uniqueId = time() . '_' . rand(1000, 9999);
+
+  if(isset($_FILES['card_image']) && isset($_FILES['banner_image'])) {
+
+    // Card Image
+    $cardImageName = $_FILES['card_image']['name'];
+    $cardImageTmp = $_FILES['card_image']['tmp_name'];
+    $cardImageExt = pathinfo($cardImageName, PATHINFO_EXTENSION);
+    $cardImageFinalName = $uniqueId . "_card." . $cardImageExt;
+    $cardImagePath = $uploadDir . $cardImageFinalName;
+
+    // Banner Image
+    $bannerImageName = $_FILES['banner_image']['name'];
+    $bannerImageTmp = $_FILES['banner_image']['tmp_name'];
+    $bannerImageExt = pathinfo($bannerImageName, PATHINFO_EXTENSION);
+    $bannerImageFinalName = $uniqueId . "_banner." . $bannerImageExt;
+    $bannerImagePath = $uploadDir . $bannerImageFinalName;
+
+    if(move_uploaded_file($cardImageTmp, $cardImagePath) && move_uploaded_file($bannerImageTmp, $bannerImagePath)) {
+      $query = "INSERT INTO news (title, date, content, card_image, banner_image) 
+                VALUES ('$title', NOW(), '$content', '$cardImageFinalName', '$bannerImageFinalName')";
+      $result = mysqli_query($conn, $query);
+
+      if($result){
+        echo "<script>alert('News Added Successfully!'); window.location.href='../../../news_page.php';</script>";
+        exit();
+      } else {
+        echo "Database Error: " . mysqli_error($conn);
+      }
+    } else {
+      echo "Failed to upload images.";
+    }
+
+  } else {
+    echo "Please upload both card and banner images.";
+  }
+}
+
+?>
+
         </div>
         </div>
       </div>

@@ -1,3 +1,9 @@
+<?php
+  include("connection.php");
+  session_start();
+  $patient_id = $_SESSION['patientid'];
+
+?>
 <!doctype html>
 <html lang="en">
 
@@ -8,17 +14,9 @@
   <link rel="shortcut icon" type="image/png" href="../assets/images/logos/seodashlogo.png" />
   <link rel="stylesheet" href="../../node_modules/simplebar/dist/simplebar.min.css">
   <link rel="stylesheet" href="../assets/css/styles.min.css" />
+
 </head>
   <style>
-    .container {
-      max-width: 600px;
-      margin: 100px auto;
-      background: #ffffff;
-      padding: 40px;
-      border-radius: 12px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-      text-align: center;
-    }
     .info {
       background-color: #e8f5e9;
       padding: 15px;
@@ -41,7 +39,10 @@
     .btn:hover {
       background-color: #125ca1;
     }
+    
   </style>
+
+
 <body>
   <!--  Body Wrapper -->
   <div class="page-wrapper" id="main-wrapper" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full"
@@ -74,30 +75,42 @@
        include('header.php');
        ?>
       <!--  Header End -->
-      <div class="container-fluid">
-         <div class="container">
-    <h1>Appointment Confirmed ✅</h1>
-    <p>Thank you for booking your appointment!</p>
-    
-    <div class="info">
-      <p><strong>Doctor:</strong> Dr. Ali Khan (Cardiologist)</p>
-      <p><strong>Date:</strong> 22 May 2025</p>
-      <p><strong>Time:</strong> 04:00 PM</p>
-    </div>
+        <?php
+$query = "SELECT appointments.*, doctor_register.name AS doctor_name 
+          FROM appointments
+          JOIN doctor_register ON appointments.doctor_id = doctor_register.id
+          WHERE appointments.patient_id = $patient_id AND appointments.status = 'Accepted'
+          ORDER BY appointments.created_at DESC LIMIT 5";
 
-    <p>A confirmation email has been sent to your registered email address.</p>
+$result = mysqli_query($conn, $query);
+?>
 
-    <a href="my_appointments.html" class="btn">Go to My Appointments</a>
-  </div>
+<div class="container-fluid">
+  <div class="row justify-content-center">
+    <div class="col-md-5">
+      <div class="card shadow-sm border-0">
+        <div class="card-header bg-success text-white fw-semibold">
+          Appointment Notifications
         </div>
-        <div class="py-6 px-6 text-center">
-          <p class="mb-0 fs-4">Design and Developed by <a href="https://adminmart.com/" target="_blank"
-              class="pe-1 text-primary text-decoration-underline">AdminMart.com</a> Distributed by <a href="https://themewagon.com/" target="_blank"
-              class="pe-1 text-primary text-decoration-underline">ThemeWagon</a></p>
+        <div class="card-body p-3" id="notifications" style="max-height: 300px; overflow-y: auto;">
+          
+          <?php while($row = mysqli_fetch_assoc($result)): ?>
+            <div class="alert alert-success d-flex align-items-center py-2 px-3 mb-3 small shadow-sm" role="alert">
+              <span class="me-2">✅</span>
+              <div>
+                Dr. <strong><?php echo $row['doctor_name']; ?></strong> accepted appointment <strong><?php echo $row['created_at']; ?></strong> succesfully
+              </div>
+            </div>
+          <?php endwhile; ?>
+
         </div>
       </div>
     </div>
   </div>
+</div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
   <script src="../assets/libs/jquery/dist/jquery.min.js"></script>
   <script src="../assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
   <script src="../assets/libs/simplebar/dist/simplebar.js"></script>

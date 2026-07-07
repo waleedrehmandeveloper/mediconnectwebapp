@@ -2,12 +2,12 @@
 session_start();
 include("connection.php");
 
-  $patient_id = $_SESSION['patientid'];
-  $selectquery = "select * from patient_register where id= $patient_id";
-  $showresult = mysqli_query($conn,$selectquery);
-  $patientdata = mysqli_fetch_assoc($showresult);
-
+$patient_id = $_SESSION['patientid'];
+$query = "SELECT profile_pic FROM patient_register WHERE id = $patient_id";
+$showresult = mysqli_query($conn, $query); 
+$patientdata = mysqli_fetch_assoc($showresult);
 ?>
+
 <!doctype html>
 <html lang="en">
 <head>
@@ -22,7 +22,7 @@ include("connection.php");
 </head>
   <style>
     .profile-banner {
-      background: url('https://www.bootdey.com/image/900x200') no-repeat center;
+      background: url('images/patient_banner2.jpeg') no-repeat center;
       background-size: cover;
       height: 200px;
       position: relative;
@@ -55,8 +55,8 @@ include("connection.php");
     <aside class="left-sidebar">
       <!-- Sidebar scroll-->
       <div>
-        <div class="brand-logo d-flex align-items-center justify-content-between">
-          <a href="./index.php" class="text-nowrap logo-img">
+       <div class="brand-logo d-flex align-items-center justify-content-between">
+          <a href="../../../index.php" class="text-nowrap logo-img">
             <img class="w-100" src="../assets/images/logos/mediconnect_logo.png" alt="" />
           </a>
           <div class="close-btn d-xl-none d-block sidebartoggler cursor-pointer" id="sidebarCollapse">
@@ -81,14 +81,10 @@ include("connection.php");
       <!--  Header End -->
       <div class="container-fluid">
         <div class="profile-banner position-relative">
-          <img src="<?php echo $patientdata['profile_pic'] ?>" alt="Profile Picture" class="profile-avatar">
+         <img src="images/<?php echo $patientdata['profile_pic']; ?>" alt="Profile Picture" class="profile-avatar">
           
           <!-- Banner Upload Button -->
           <input type="file" name="banner_img" id="bannerInput" class="d-none">
-          <button type="button" class="btn btn-dark btn-sm position-absolute top-0 end-0 m-3"
-          onclick="document.getElementById('bannerInput').click()">
-          <i class="bi bi-upload"></i> Change Banner
-        </button>
       </div>
       
       <!-- Profile Form -->
@@ -170,26 +166,28 @@ if (isset($_POST['save'])) {
 
   $image = $_FILES['profile_pic']['name'] ?? '';
   $tmp_name = $_FILES['profile_pic']['tmp_name'] ?? '';
-  $image_name = rand(0,99) . "_" . $image;
-  $upload_path = "images/" . $image_name;
+  $image_name = rand(0,99) . "_" . $image; 
+  $upload_folder = "images/";
 
-  // Upload profile picture if provided
   if (!empty($image) && !empty($tmp_name)) {
-    move_uploaded_file($tmp_name, $upload_path);
+    move_uploaded_file($tmp_name, $upload_folder . $image_name);
 
-    $query = "UPDATE patient_register SET name='$fullname', city='$city', email='$email', contact='$contact', gender='$gender', profile_pic='$upload_path' WHERE id='$patient_id'";
+    $query = "UPDATE patient_register SET updated_at= NOW(), name='$fullname', city='$city', email='$email', contact='$contact', gender='$gender', profile_pic='$image_name' WHERE id='$patient_id'";
   } else {
-    $query = "UPDATE patient_register SET name='$fullname', email='$email', contact='$contact', gender='$gender' WHERE id='$patient_id'";
+    $query = "UPDATE patient_register SET updated_at= NOW(), name='$fullname', email='$email', contact='$contact', gender='$gender' WHERE id='$patient_id'";
   }
 
   $result = mysqli_query($conn, $query);
   if ($result) {
-    echo "<script>alert('Profile updated successfully');</script>";
+    echo 
+    "<script>alert('Profile updated successfully');
+    window.location.href= 'edit_profile.php';
+    </script>";
   }
 
   if (!empty($pass) && !empty($confirm_pass)) {
     if ($pass === $confirm_pass) {
-      $passquery = "UPDATE patient_register SET password='$confirm_pass' WHERE id='$patient_id'";
+      $passquery = "UPDATE patient_register SET updated_at= NOW(), password='$confirm_pass' WHERE id='$patient_id'";
       mysqli_query($conn, $passquery);
     } else {
       echo "<script>alert('Passwords do not match');</script>";
@@ -199,6 +197,8 @@ if (isset($_POST['save'])) {
 ?>
 
   </div>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
   <script src="../assets/libs/jquery/dist/jquery.min.js"></script>
   <script src="../assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
   <script src="../assets/libs/simplebar/dist/simplebar.js"></script>

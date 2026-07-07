@@ -1,5 +1,13 @@
 <?php
 session_start();
+if (
+    !isset($_SESSION['dname']) || 
+    !isset($_SESSION['role']) || 
+    $_SESSION['role'] !== "doctor"
+) {
+    header("Location: index.php");
+    exit();
+}
 $doctorid= $_SESSION['doctor_id'];
 include("connection.php");
 $query = "select * from doctor_register where id = $doctorid";
@@ -22,7 +30,7 @@ $fresult= mysqli_fetch_assoc($result);
   <link rel="stylesheet" href="../assets/css/dash.css" />
   <style>
     .profile-banner {
-      background-image: url('https://st4.depositphotos.com/9999814/24062/i/450/depositphotos_240620978-stock-photo-male-doctor-standing-hospital-office.jpg');
+      background-image: url('imagedata/doctor_banner2.jpeg');
       background-size: cover;
       background-position: center;
       height: 200px;
@@ -76,8 +84,8 @@ $fresult= mysqli_fetch_assoc($result);
     <aside class="left-sidebar">
       <!-- Sidebar scroll-->
       <div>
-        <div class="brand-logo d-flex align-items-center justify-content-between">
-          <a href="./index.php" class="text-nowrap logo-img">
+         <div class="brand-logo d-flex align-items-center justify-content-between">
+          <a href="../../../index.php" class="text-nowrap logo-img">
             <img class="w-100" src="../assets/images/logos/mediconnect_logo.png" alt="" />
           </a>
           <div class="close-btn d-xl-none d-block sidebartoggler cursor-pointer" id="sidebarCollapse">
@@ -102,33 +110,11 @@ $fresult= mysqli_fetch_assoc($result);
   <!-- Profile Banner -->
    <div class="container-fluid">
 <div class="profile-banner container position-relative py-5" style="position: relative;">
-   <img src="<?php echo $fresult['profile_pic']; ?>" alt="Doctor Image" class="profile-avatar">
+   <img src="imagedata/<?php echo $fresult['profile_pic']; ?>" alt="Doctor Image" class="profile-avatar">
     <div class="profile-text">
-      <h1><?php echo $fresult['name'] ?></h1>
-      <span><?php echo $fresult['category'] ?> - <?php echo $fresult['location'] ?></span>
+      <h1 class="text-white"><?php echo $fresult['name'] ?></h1>
+      <span class="text-white"><?php echo $fresult['category'] ?> - <?php echo $fresult['location'] ?></span>
     </div>
-
-    <!-- Hidden file input -->
-    <input type="file" id="fileUpload" style="display:none;" />
-
-    <!-- Upload button -->
-    <button type="button" id="uploadBtn" style="
-    position: absolute;
-    bottom: 15px;
-    right: 15px;
-    padding: 12px 25px;
-    font-size: 16px;
-    font-weight: 600;
-    color: white;
-    background-color: #007bff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-    transition: background-color 0.3s ease;
-">
-      Upload
-    </button>
 </div>
 
   <!-- Doctor Details Section -->
@@ -199,6 +185,8 @@ $fresult= mysqli_fetch_assoc($result);
   </div>
 </div>
 </div>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
   <!-- Bootstrap JS -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
    <script src="../assets/libs/jquery/dist/jquery.min.js"></script>

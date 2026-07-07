@@ -34,7 +34,11 @@ session_start();
     <!-- Template Stylesheet -->
     <link href="css/style.css" rel="stylesheet">
 </head>
-
+  <style>
+     body::-webkit-scrollbar {
+     display: none; 
+    }
+    </style>
 <body>
 
       <!-- Spinner Start -->
@@ -50,35 +54,26 @@ session_start();
 <div class="container-fluid px-0 mx-0">
   <div class="row g-0">
 
-    <!-- Left Column -->
-    <div class="col-12 col-md-6">
-      <div class="signbox-l bg-primary text-white p-4 d-flex flex-column justify-content-center" style="min-height: 600px;">
+   <div class="col-12 col-md-6">
+      <div class="signbox-l bg-primary text-white p-5 d-flex flex-column justify-content-center" style="min-height: 600px;">
         <div>
-          <h3 class="mb-4">Get access to everything WebMD offers</h3>
-          <ul class="list-unstyled ps-3 mb-0">
+          <h3 class="mb-4 fw-bold">Get access to everything WebMD offers</h3>
+          <ul class="list-unstyled ps-2 mb-0">
             <li class="d-flex align-items-start mb-3">
-              <span class="me-2">•</span>
+              <span class="me-2">✔️</span>
               <span>Personalized tools for managing your health</span>
             </li>
             <li class="d-flex align-items-start mb-3">
-              <span class="me-2">•</span>
-              <span>Health and wellness updates delivered to your inbox</span>
+              <span class="me-2">✔️</span>
+              <span>Health and wellness updates to your inbox</span>
             </li>
             <li class="d-flex align-items-start mb-3">
-              <span class="me-2">•</span>
-              <span>Saved articles, conditions and medications</span>
+              <span class="me-2">✔️</span>
+              <span>Save articles, conditions & medications</span>
             </li>
             <li class="d-flex align-items-start mb-3">
-              <span class="me-2">•</span>
-              <span>Health and wellness updates delivered to your inbox</span>
-            </li>
-            <li class="d-flex align-items-start mb-3">
-              <span class="me-2">•</span>
-              <span>Health and wellness updates delivered to your inbox</span>
-            </li>
-            <li class="d-flex align-items-start mb-3">
-              <span class="me-2">•</span>
-              <span>Health and wellness updates delivered to your inboxs</span>
+              <span class="me-2">✔️</span>
+              <span>Get expert health tips and advice</span>
             </li>
           </ul>
         </div>
@@ -86,40 +81,49 @@ session_start();
     </div>
 
     <!-- Right Column -->
-    <div class="col-12 col-md-6">
-      <div class="p-4 d-flex flex-column justify-content-center" style="min-height: 600px;">
+    <div class="col-12 col-md-6 bg-light">
+      <div class="p-5 d-flex flex-column justify-content-center" style="min-height: 600px;">
         <div>
-          <h3 class="text-center text-primary mb-3">Sign Up</h3>
+          <h3 class="text-center text-primary mb-4 fw-bold">Create Your Account</h3>
           <form method="POST">
-    <!-- Full Name -->
-    <div class="form-group mb-2">
-        <label class="mb-1" for="fullName">Full Name</label>
-        <input placeholder="Enter your name" type="text" id="fullName" name="name" class="form-control" required>
-    </div>
+            <!-- Full Name -->
+            <div class="mb-3">
+              <label for="fullName" class="form-label">Full Name</label>
+              <input type="text" id="fullName" name="name" class="form-control" placeholder="Enter your name" required>
+            </div>
 
-    <!-- Email -->
-    <div class="form-group mb-2">
-        <label class="mb-1" for="email">Email Address</label>
-        <input placeholder="Enter your @email" type="email" id="email" name="email" class="form-control" required>
-    </div>
+            <!-- Email -->
+            <div class="mb-3">
+              <label for="email" class="form-label">Email Address</label>
+              <input type="email" id="email" name="email" class="form-control" placeholder="Enter your email" required>
+            </div>
 
-    <!-- Password -->
-    <div class="form-group mb-2">
-        <label class="mb-1" for="password">Password</label>
-        <input placeholder="Enter your password"  type="password" id="password" name="password" class="form-control" required>
-    </div>
+            <!-- Password -->
+            <div class="mb-3">
+              <label for="password" class="form-label">Password</label>
+              <input type="password" id="password" name="password" class="form-control" placeholder="Create a password" required>
+            </div>
 
-    <!-- Role Selection (Doctor or Patient) -->
-    <div class="form-group mb-2">
-        <label class="mb-1" for="role">Select Role</label>
-        <select id="role" name="role" class="form-control" required>
-            <option disabled selected>select</option>
-            <option value="patient">Patient</option>
-            <option value="doctor">Doctor</option>
-        </select>
+            <!-- Role Selection -->
+            <div class="mb-4">
+              <label for="role" class="form-label">Select Role</label>
+              <select id="role" name="role" class="form-select" required>
+                <option disabled selected>Select</option>
+                <option value="patient">Patient</option>
+                <option value="doctor">Doctor</option>
+              </select>
+            </div>
+
+            <!-- Submit Button -->
+            <button type="submit" name="signup" class="btn btn-primary w-100 p-2">SIGNUP</button>
+          </form>
+
+          <p class="text-center small mt-3">Already have an account? 
+            <a href="signin.php" class="text-decoration-none text-primary fw-semibold">Sign In here</a>
+          </p>
+        </div>
+      </div>
     </div>
-    <input type="submit" name="signup" value="Sign Up" class="btn btn-primary w-100 p-2 mt-4 mb-2">
-    </form>
 <?php
 include('connection.php');
 
@@ -163,11 +167,6 @@ if ($result) {
 
 }
 ?>
-
-            <p class="text-center small">Already have an account? <a href="signin.php">Sign In here</a></p>
-        </div>
-      </div>
-    </div>
 
   </div>
 </div>

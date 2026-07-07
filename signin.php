@@ -30,6 +30,7 @@
             $admresult= mysqli_query($conn,$admquery);
             if(mysqli_num_rows($admresult)> 0){
               $admin= mysqli_fetch_assoc($admresult);
+              $_SESSION['admin_id']= $admin['id'];
               $_SESSION['admin_mail']= $admin['email'];
               $_SESSION['aname']= $admin['username'];
               $_SESSION['role']= $admin['role'];
@@ -75,7 +76,11 @@
     <!-- Template Stylesheet -->
     <link href="css/style.css" rel="stylesheet">
 </head>
-
+    <style>
+     body::-webkit-scrollbar {
+     display: none; 
+    }
+    </style>
 <body>
 
       <!-- Spinner Start -->
@@ -88,29 +93,28 @@
     <?php
    include('components/navbar.php');
    ?>
-<div class="container-fluid px-0 mx-0">
-  <div class="row g-0">
-
+<div class="container-fluid">
+  <div class="row">
     <!-- Left Column -->
     <div class="col-12 col-md-6">
-      <div class="signbox-l bg-primary text-white p-4 d-flex flex-column justify-content-center" style="min-height: 500px;">
+      <div class="signbox-l bg-primary text-white p-5 d-flex flex-column justify-content-center" style="min-height: 500px;">
         <div>
-          <h3 class="mb-4">Get access to everything WebMD offers</h3>
-          <ul class="list-unstyled ps-3 mb-0">
+          <h3 class="mb-4 fw-bold">Get access to everything WebMD offers</h3>
+          <ul class="list-unstyled ps-2 mb-0">
             <li class="d-flex align-items-start mb-3">
-              <span class="me-2">•</span>
+              <span class="me-2">✔️</span>
               <span>Personalized tools for managing your health</span>
             </li>
             <li class="d-flex align-items-start mb-3">
-              <span class="me-2">•</span>
+              <span class="me-2">✔️</span>
               <span>Health and wellness updates delivered to your inbox</span>
             </li>
             <li class="d-flex align-items-start mb-3">
-              <span class="me-2">•</span>
+              <span class="me-2">✔️</span>
               <span>Saved articles, conditions and medications</span>
             </li>
             <li class="d-flex align-items-start">
-              <span class="me-2">•</span>
+              <span class="me-2">✔️</span>
               <span>Expert insights and patient stories</span>
             </li>
           </ul>
@@ -119,31 +123,41 @@
     </div>
 
     <!-- Right Column -->
-    <div class="col-12 col-md-6">
-      <div class="p-4 d-flex flex-column justify-content-center" style="min-height: 500px;">
+    <div class="col-12 col-md-6 bg-light">
+      <div class="p-5 d-flex flex-column justify-content-center" style="min-height: 500px;">
         <div>
-          <h3 class="text-center text-primary mb-3">Sign In</h3>
+          <h3 class="text-center text-primary mb-4 fw-bold">Sign In</h3>
           <form method="POST">
+            <!-- Email -->
             <div class="mb-3">
-              <label for="email" class="form-label">Email address</label>
+              <label for="email" class="form-label">Email Address</label>
               <input type="email" class="form-control" id="email" name="email" required placeholder="you@example.com">
             </div>
-            <div class="mb-3">
+
+            <!-- Password -->
+            <div class="mb-4">
               <label for="password" class="form-label">Password</label>
               <input type="password" class="form-control" id="password" name="password" required placeholder="Enter your password">
             </div>
+
+            <!-- Submit Button -->
             <div class="d-grid mb-3">
-              <input type="submit" name="signin" class="btn btn-primary">🔐 Sign In</input>
+              <button type="submit" name="signin" class="btn btn-primary fw-semibold">
+                SIGNIN
+              </button>
             </div>
-            <p class="text-center small">Don't have an account? <a href="signup.php">Sign up here</a></p>
+
+            <p class="text-center small">
+              Don’t have an account?
+              <a href="signup.php" class="text-decoration-none text-primary fw-semibold">Sign up here</a>
+            </p>
           </form>
-         
         </div>
       </div>
     </div>
-
   </div>
 </div>
+
 
 
        <!-- Footer Start -->
